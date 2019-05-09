@@ -1,0 +1,16 @@
+{% extends "Coursework19/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset>
+      {{ u_form|crispy }}
+      {{ p_form|crispy }}
+    </fieldset>
+    <div>
+      <button type="submit">изменить</button>
+    </div>
+  </form>
+</div>
+{% endblock content %}

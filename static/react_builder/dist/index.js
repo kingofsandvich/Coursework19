@@ -115,7 +115,7 @@ eval("function _typeof(obj) { if (typeof Symbol === \"function\" && typeof Symbo
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"div {\\r\\n\\tbackground-color: #09239F;\\r\\n}\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./app/index.css?./node_modules/css-loader/dist/cjs.js");
+eval("exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"div {\\r\\n\\tbackground-color: #808080;\\r\\n}\\r\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./app/index.css?./node_modules/css-loader/dist/cjs.js");
 
 /***/ }),
 
