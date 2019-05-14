@@ -12,6 +12,7 @@ from Index import views as ind_views
 
 
 urlpatterns = [
+    path('', ind_views.red_home),
     path('index/', ind_views.home, name="index"),
     path('edit_page/', ind_views.edit_page, name="edit_page"),
     path('admin/', admin.site.urls),

@@ -12,5 +12,8 @@ def home(request):
 		css = request.user.profile.css
 	return render(request, 'Index/index.html', {'html': html, 'css':css})
 
+def red_home(request):
+	return redirect('index');
+
 def edit_page(request):
 	return render(request, 'Index/edit_page.html')#, {'html': html, 'css':css})

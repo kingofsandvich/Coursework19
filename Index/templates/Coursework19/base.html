@@ -40,7 +40,7 @@
 
 {% if messages %}
 	{% for message in messages %}
-	<div >
+	<div id="alignCenter">
 		{{ message }}
 	</div>
 	{% endfor %}
@@ -49,14 +49,7 @@
 {% block content %}
 {% endblock content %}
 
-
-
-<style type="text/css">
-
-</style>
-
-<!--script type="text/javascript" src="{% static 'react_builder/dist/index.js' %}"></script-->
-<!--script type="text/javascript" src="{% static 'make_page/dist/index.js' %}"></script-->
+<style type="text/css"></style>
 <script type="text/javascript" src="{% static 'minimal-react-webpack-babel-setup/dist/bundle.js' %}"></script>
 </body>
 </html>
