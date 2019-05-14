@@ -10,13 +10,12 @@ from users.vk_auth import VKAuth
 class VKForm(forms.Form):
     login = forms.CharField(required=True, label='Логин')
     password = forms.CharField(widget=forms.PasswordInput(), required=True, label='Пароль')
-#widget=forms.PasswordInput(),
 class VKForm_two_factor(forms.Form):
     code = forms.CharField(required=True, label='Код подтверждения')
 
 
 @login_required
-def porcess_vk_auth2(request):#, vkAuth, first_call=False):
+def porcess_vk_auth2(request):
     vk_second = request.session.get('vk_second')
     if (vk_second == None):
         redirect('porcess_vk_auth')
@@ -30,7 +29,6 @@ def porcess_vk_auth2(request):#, vkAuth, first_call=False):
             print(vkAuth)
             print(vkAuth.form_parser)
             print(vkAuth.form_parser.url)
-            #vkAuth.continue_auth(code)
             messages.success(request, f'Введите код подтверждения.')
             return redirect('index')
     else:

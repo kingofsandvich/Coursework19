@@ -6,9 +6,6 @@ from .models import Profile
 # переопределяем поля пользователя
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=False)
-    #vklogin = forms.CharField(required=False)
-    #vkpassword = forms.CharField(required=False)
-    #youtubetoken = forms.CharField(required=False)
     class Meta:
         model = User
         fields = ['username', 'email', 'password1','password2']

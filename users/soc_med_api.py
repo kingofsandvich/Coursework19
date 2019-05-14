@@ -19,41 +19,6 @@ from users.vk_auth import get_news_from_to_date, set_status
 from users.vk_auth import repost as repost_vk
 from users.vk_auth import set_like as set_like_vk
 
-def get_news_from_to (vkAuth, utfrom, utto) :
-    access_token = vkAuth.get_token()
-    session0 = vk.Session(access_token = access_token)
-    vk_api = vk.API(session0, v = '5.92')
-
-    news = []
-    newsFeed = vk_api.newsfeed.get(max_photos = 15,
-                                   count = 100,
-                                   start_time = utfrom,
-                                   end_time = utto)
-
-    news += newsFeed['items']
-    i = len(news) - 1
-    try :
-        nextPg = newsFeed['next_from']
-        while i < 1000 :
-            if nextPg :
-                newsFeed = vk_api.newsfeed.get(max_photos = 15,
-                                               count = 100,
-                                               start_time = utfrom,
-                                               start_from = utto)
-                news += newsFeed['items']
-                i = len(news) - 1
-            else :
-                break
-    except  :
-        print('error while getting VK feed')
-
-    if i >= 1000 :
-        news = news[:1000]
-    print("num posts = " + str(len(news)))
-    news = {"vk":news}
-
-    return json.dumps(news)
-
 #@login_required
 def display(request, utfrom, utto):
     profile = request.user.profile

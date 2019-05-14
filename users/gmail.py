@@ -5,8 +5,8 @@ SCOPES = ['https://mail.google.com/']
 flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_FILE, SCOPES)
 
 credentials = flow.run_local_server(host='localhost',
-    port=8080, 
-    authorization_prompt_message='Please visit this URL: {url}', 
+    port=8080,
+    authorization_prompt_message='Please visit this URL: {url}',
     success_message='The auth flow is complete; you may close this window.',
     open_browser=True)
 
@@ -18,7 +18,7 @@ from email.mime.image import MIMEImage
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 import mimetypes
-from datetime import datetime 
+from datetime import datetime
 from datetime import timedelta
 
 gmail = build('gmail', 'v1', credentials = credentials)
@@ -33,7 +33,7 @@ def create_message(sender, to, subject, message_text):
     message['from'] = sender
     message['subject'] = subject
     raw = base64.urlsafe_b64encode(message.as_bytes())
-    raw = raw.decode() 
+    raw = raw.decode()
     return {'raw': raw}
 
 def create_message_with_attachment(sender, to, subject, message_text, file):
@@ -71,7 +71,7 @@ def create_message_with_attachment(sender, to, subject, message_text, file):
     msg.add_header('Content-Disposition', 'attachment', filename=filename)
     message.attach(msg)
     raw = base64.urlsafe_b64encode(message.as_bytes())
-    raw = raw.decode() 
+    raw = raw.decode()
     return {'raw': raw}
 
 def send_message(gmail, message):
@@ -87,54 +87,49 @@ def get_messages_ids(gmail, spamOn) :
     time = (datetime.now() - timedelta(days=7))
     messages_all = []
     print(time)
-    j = 0 
+    j = 0
     nextpgtoken = None
     while True :
-            
         subres = gmail.users().messages().list(userId = 'me', pageToken = nextpgtoken, maxResults = 500, includeSpamTrash = spamOn).execute()
-            
         messages_all+=subres['messages']
-
         try :
             nextpgtoken = subres.get('nextPageToken')
-        except : 
+        except :
             break
-
         if nextpgtoken is None :
             break
-
-        j+=1    
+        j+=1
 
     return messages_all
 
 def get_messages (gmail, from_time, to_time, ids) :
     all_messages = []
     lastmsg = gmail.users().messages().get(userId = 'me', id = ids[len(ids) - 1]['id']).execute()
-    if int(lastmsg['internalDate']) / 1000 > to_time : 
+    if int(lastmsg['internalDate']) / 1000 > to_time :
         print(int(lastmsg['internalDate'])) / 1000
         return all_messages
-    for id_ in ids : 
+    for id_ in ids :
         msg = gmail.users().messages().get(userId = 'me', id = id_['id']).execute()
-        if int(msg['internalDate']) / 1000 < to_time and int(msg['internalDate']) / 1000 > from_time : 
+        if int(msg['internalDate']) / 1000 < to_time and int(msg['internalDate']) / 1000 > from_time :
             subject = ""
             print(msg)
-            for head in msg['payload']['headers'] : 
-                if head['name'] == 'Subject' : 
+            for head in msg['payload']['headers'] :
+                if head['name'] == 'Subject' :
                     subject = head['value']
             all_messages.append([msg['snippet'], msg['internalDate'], subject])
-        elif int(msg['internalDate']) / 1000 <= from_time : 
+        elif int(msg['internalDate']) / 1000 <= from_time :
             break
     return all_messages
 
-#наш адрес 
+#наш адрес
 address = get_address(gmail)
-#создаем сообщение: от адреса, на адрес legomike, тема - test2, текст - дратути 
+#создаем сообщение: от адреса, на адрес legomike, тема - test2, текст - дратути
 message = create_message(address, 'legomike@mail.ru', 'test2', 'dratuti!')
 #отправляем
 send_message(gmail, message)
 
 
-#получаем все айдишники наших писем 
+#получаем все айдишники наших писем
 res1 = get_messages_ids(gmail, False)
-#получаем текста писем темы и время по заданному отрезку времени 
+#получаем текста писем темы и время по заданному отрезку времени
 res2 = get_messages(gmail, 1557017743, 1557449743, res1)
