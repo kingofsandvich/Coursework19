@@ -1,0 +1,64 @@
+
+body{
+  overflow: hidden;
+}
+
+#gjs {
+  border: 3px solid #444;
+  margin: 0;
+  left: 0;
+  top: 30px;
+  position: absolute;
+}
+
+.gjs-cv-canvas {
+  top:0;
+  width: 100%;
+  height: 100%;
+}
+
+.gjs-block {
+  width: auto;
+  height: auto;
+  min-height: auto;
+}
+
+.Constructor{
+  height: 100%;
+  width: 100%;
+}
+
+.constrBar > .toggleSwitch {
+  width: 100px;
+  display: inline-block;
+}
+
+.constrBar{
+  height: 30px;
+  width: 100vmax;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #141414;
+}
+
+.panel__top {
+  padding: 0;
+  width: 100%;
+  display: flex;
+  position: initial;
+  justify-content: left;
+  justify-content: space-between;
+}
+.panel__basic-actions {
+  position: initial;
+}
+
+.gjs-pn-panel {
+    display:block;
+    position: relative;
+  }
+
+.gjs-sm-sectors{
+    max-width: 500px;
+  }

@@ -5,7 +5,6 @@ from django.urls import path, include
 
 from django.contrib.auth.decorators import login_required
 from users.soc_med_api import display, change_status, repost, set_like
-#from users.vk_auth import porcess_vk_auth
 from users.views import set_page, porcess_vk_auth, porcess_vk_auth2
 from Index import views as ind_views
 

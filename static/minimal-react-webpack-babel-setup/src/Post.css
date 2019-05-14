@@ -1,0 +1,53 @@
+.Post{
+  border-radius: 3px;
+  width: 50%;
+  min-width: 400px;
+  height: auto;
+  min-height: 100px;
+  background-color: #141414;
+  margin: 5px;
+  margin-top:20px;
+  display: inline-block;
+  color: white;
+  text-align: left;
+}
+
+@media (min-width: 1050px) {
+  .Post{
+    margin-left: 30%;
+    margin-right: 30%;
+    width: 40%;
+  }
+}
+
+#biasedButton{
+  margin-left: 10px;
+}
+
+#text,#sourceInfo,#attachments, #comments, #actions{
+  margin: 10px;
+}
+
+#sourceInfo{
+  text-align: center;
+}
+#text{
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+}
+#attachments{
+  text-align: center;
+  border-bottom: 2px solid white;
+}
+
+#attachments > img{
+  max-width: 95%;
+  display: inline-block;
+  margin-top: 10px;
+  border: 2px solid white;
+}
+#comments{
+}
+#actions{
+
+}

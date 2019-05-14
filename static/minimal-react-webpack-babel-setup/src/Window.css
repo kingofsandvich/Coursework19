@@ -1,0 +1,59 @@
+.Window{
+  height: 100%;
+  display: inline-block;
+}
+
+.pseudoScreen{
+    height: 100vmax;
+    width: 100vmax;
+}
+
+.Leash{
+  width: 90%;
+  display: inline-block;
+}
+
+.toggleSwitch{
+  background-color: #141414;
+  height: 30px;
+  border-left: 2px solid white;
+  text-align: center;
+  text-decoration: none;
+}
+
+.toggleSwitch p {
+  margin: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: white;
+}
+.toggleSwitch > p:hover{
+  text-decoration: underline;
+}
+
+.toggleButton{
+  display: inline-block;
+  line-height: 30px;
+  width: 10%;
+  background-color: #141414;
+  text-align: center;
+  border-right: 1px solid white;
+}
+.toggleButton > div{
+
+  height: 34px;
+  width: 34px;
+}
+
+.toggleButton > div:hover{
+  background-color: #935599;
+}
+
+.toggleButton p {
+  margin: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: white;
+  font-weight: 100;
+  font-size: 39px;
+}
