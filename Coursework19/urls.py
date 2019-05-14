@@ -1,28 +1,29 @@
-"""Coursework19 URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from users import views as user_views
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 
+from django.contrib.auth.decorators import login_required
+from users.soc_med_api import display, change_status, repost, set_like
+#from users.vk_auth import porcess_vk_auth
+from users.views import set_page, porcess_vk_auth, porcess_vk_auth2
+from Index import views as ind_views
+
+
+
 urlpatterns = [
-    path('', include('Index.urls')),
+    path('index/', ind_views.home, name="index"),
+    path('edit_page/', ind_views.edit_page, name="edit_page"),
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('edit/', user_views.edit, name='edit'),
+    path('feed/<int:utfrom>/<int:utto>/', display),
+    path('repost/<int:owner_id>/<int:post_id>/', repost),
+    path('like/<int:owner_id>/<int:post_id>/', set_like),
+    path('style/', set_page),
+    path('authorize/vk/',porcess_vk_auth, name='porcess_vk_auth'),
+    path('authorize/vk/2',porcess_vk_auth2, name='porcess_vk_auth2'),
+    path('change_status/vk/',change_status),
 ]

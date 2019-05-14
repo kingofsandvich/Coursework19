@@ -1,8 +1,16 @@
 {% extends "Coursework19/base.html" %}
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 
 {% load static %}
 {% block content %}
 
-<div id="App"></div>
+{% if user.is_authenticated %}
+    <div id="main_page">
+      {% autoescape off %}{{html}}{% endautoescape %}
+      <style type="text/css">
+        {% autoescape off %}{{css}}{% endautoescape %}
+      </style>
+    </div>
+{% endif %}
 
 {% endblock content %}

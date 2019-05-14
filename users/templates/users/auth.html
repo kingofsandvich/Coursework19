@@ -1,0 +1,14 @@
+{% extends "Coursework19/base.html" %}
+{% block content %}
+<div>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset style="width:255px;">
+      {{ form }}
+    </fieldset>
+    <div>
+      <button type="submit">Добавить аккаунт</button>
+    </div>
+  </form>
+</div>
+{% endblock content %}

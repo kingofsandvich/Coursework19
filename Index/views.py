@@ -5,4 +5,12 @@ from django.contrib import messages
 
 # Create your views here.
 def home(request):
-	return render(request, 'Index/index.html')
+	html = ""
+	css = ""
+	if request.user.is_authenticated:
+		html = request.user.profile.html
+		css = request.user.profile.css
+	return render(request, 'Index/index.html', {'html': html, 'css':css})
+
+def edit_page(request):
+	return render(request, 'Index/edit_page.html')#, {'html': html, 'css':css})

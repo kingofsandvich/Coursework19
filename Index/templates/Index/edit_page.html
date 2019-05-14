@@ -1,0 +1,11 @@
+{% extends "Coursework19/base.html" %}
+
+{% load static %}
+{% block content %}
+<script src="https://unpkg.com/react@15/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+{% if user.is_authenticated %}
+    <div id="constructor"></div>
+{% endif %}
+
+{% endblock content %}
