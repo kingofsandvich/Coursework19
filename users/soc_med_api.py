@@ -1,14 +1,3 @@
-import re
-import urllib
-import logging
-import requests
-import getpass
-from html.parser import HTMLParser
-import vk
-from datetime import datetime
-from datetime import timedelta
-import time as tm
-
 from django.contrib.auth.decorators import login_required
 from django.template.response import TemplateResponse
 from django.http import HttpResponse

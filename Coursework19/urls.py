@@ -12,6 +12,7 @@ from Index import views as ind_views
 
 urlpatterns = [
     path('', ind_views.red_home),
+    path('change_status/vk/',change_status),
     path('index/', ind_views.home, name="index"),
     path('edit_page/', ind_views.edit_page, name="edit_page"),
     path('admin/', admin.site.urls),
@@ -25,5 +26,5 @@ urlpatterns = [
     path('style/', set_page),
     path('authorize/vk/',porcess_vk_auth, name='porcess_vk_auth'),
     path('authorize/vk/2',porcess_vk_auth2, name='porcess_vk_auth2'),
-    path('change_status/vk/',change_status),
+
 ]

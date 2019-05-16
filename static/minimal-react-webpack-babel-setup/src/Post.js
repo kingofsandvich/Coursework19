@@ -55,13 +55,6 @@ class Post extends Component {
     let url = window.location.origin + "/like/" + this.owner_id + "/" + this.post_id +"/";
     fetch(url).catch();
   }
-  dataRecieved = (data) => {
-    this.setState({posts: data});
-  }
-  componentDidUpdate(prevProps, prevState, snapshot){
-  }
-  componentDidMount(){
-  }
 }
 
 export default Post;

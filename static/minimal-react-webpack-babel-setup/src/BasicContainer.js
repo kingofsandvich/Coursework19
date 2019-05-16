@@ -23,6 +23,4 @@ class BasicContainer extends Component {
   }
 }
 
-
-
 export default BasicContainer;
