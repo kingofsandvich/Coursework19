@@ -7,6 +7,7 @@ HSE SE 18-19 second year dedicated to editable web interface for interacting wit
   - Пакетный мэнеджер pip
   - NodeJS v11.6.0 (для работы webpack)
   - Пакетный мэнеджер npm
+
 Чтобы установить зависимости для Python из папки '/Coursework19/' запустить:
 ```sh
 python -m pip install -r "requirements.txt"
