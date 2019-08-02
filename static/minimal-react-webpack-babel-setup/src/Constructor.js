@@ -4,6 +4,8 @@ import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 
 import Window from './Window';
+import Status from './Status'
+import Feed from './Feed'
 import './Constructor.css';
 import './Window.css';
 import './index.css'
@@ -11,6 +13,17 @@ import './index.css'
 import grapesjs from 'grapesjs';
 import exportGrapes from 'grapesjs-plugin-export';
 import './../node_modules/grapesjs/dist/css/grapes.min.css';
+
+var elem = document.getElementById('constructor');
+
+function openFullscreen() {
+  if((!window.screenTop && !window.screenY) ||
+     (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+      document.exitFullscreen();
+  } else {
+       elem.requestFullscreen();
+  }
+}
 
 class Constructor extends Component {
   constructor(props){
@@ -40,6 +53,7 @@ class Constructor extends Component {
           </Window>
           <Window name="code" switchWidth="100px" height="400px" width="500px">
               <div class="panel__basic-actions"></div>
+              <div class="panel__devices"></div>
           </Window>
         </div>
       </div>
@@ -67,6 +81,22 @@ class Constructor extends Component {
           width: '100%',
           storageManager: { type: null },
           panels: { defaults: [] },
+          mediaCondition: 'min-width', // default is `max-width`
+          deviceManager: {
+            devices: [{
+                name: 'Mobile',
+                width: '320',
+                widthMedia: '320',
+              },{
+                name: 'Tablet',
+                width: '720',
+                widthMedia: '720',
+              }, {
+                name: 'Desktop',
+                width: '1024',
+                widthMedia:'1024',
+            }]
+          },
           layerManager: {
             appendTo: '.layers-container'
           },
@@ -142,6 +172,46 @@ class Constructor extends Component {
       id: 'panel-top',
       el: '.panel__top',
     });
+
+    // this.editor.setDevice('Mobile');
+
+    this.editor.Panels.addPanel({
+        id: 'panel-devices',
+        el: '.panel__devices',
+        buttons: [{
+            id: 'device-desktop',
+            label: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"  viewBox="0 0 24 24"><path d="M21 14H3V4h18m0-2H3c-1.11 0-2 .89-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4a2 2 0 0 0-2-2z"></path></svg>',
+            command: 'set-device-desktop',
+            active: true,
+            togglable: false,
+          }, {
+            id: 'device-tablet',
+            label: '<svg viewBox="0 0 28 28" class="icon icon-tablet" width="32" height="32"  aria-hidden="true"><path d="M19.953 2h-15.506a1.92 1.92 0 0 0-1.921 1.924v22.556a1.92 1.92 0 0 0 1.921 1.92h15.506c1.062 0 1.922-0.862 1.923-1.922v-22.554a1.924 1.924 0 0 0-1.923-1.924z m-7.752 24.502a1.226 1.226 0 1 1 1.225-1.226c-0.001 0.761-0.552 1.225-1.225 1.226z m8.235-4.202h-16.47v-17.055h16.47v17.055z"/></svg>',
+            command: 'set-device-tablet',
+            togglable: false,
+        }, {
+          id: 'device-mobile',
+          label: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"  viewBox="0 0 24 24"><path d="M16 18H7V4h9m-4.5 18c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5m4-21h-8A2.5 2.5 0 0 0 5 3.5v17A2.5 2.5 0 0 0 7.5 23h8a2.5 2.5 0 0 0 2.5-2.5v-17A2.5 2.5 0 0 0 15.5 1z"></path></svg>',
+          command: 'set-device-mobile',
+          togglable: false,
+      }],
+      });
+
+
+      // panel__fullscreen
+      this.editor.Commands.add('set-device-desktop', {
+        run: editor => editor.setDevice('Desktop')
+      });
+      this.editor.Commands.add('set-fullscreen', {
+        run: editor => openFullscreen()
+      });
+      this.editor.Commands.add('set-device-tablet', {
+        run: editor => editor.setDevice('Tablet')
+      });
+      this.editor.Commands.add('set-device-mobile', {
+        run: editor => editor.setDevice('Mobile')
+      });
+
     this.editor.Panels.addPanel({
       id: 'basic-actions',
       el: '.panel__basic-actions',
@@ -152,6 +222,20 @@ class Constructor extends Component {
           label: 'HTML & CSS',
           command: 'export-template',
           context: 'export-template',
+        },{
+          id: 'full',
+          className: 'btn-fullscreen',
+          label: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 18 18"><path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5 6.5H11V15h4v-4h-1.5v2.5zM11 3v1.5h2.5V7H15V3h-4z"/></svg>',
+          active: false,
+          command: 'set-fullscreen',
+          // context: 'export-template',
+        },{
+          id: 'markup',
+          className: 'btn-markup',
+          label: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>',
+          active: true,
+          command: 'sw-visibility',
+          // context: 'export-template',
         },
       ],
     });
@@ -159,17 +243,13 @@ class Constructor extends Component {
     this.editor.BlockManager.add('feed', {
       label: 'feed',
       content:
-      `<div>
-        <div id="feed"></div>
-      </div>`,
+      `<div id="feed"></div>`,
     });
 
     this.editor.BlockManager.add('status', {
       label: 'status',
       content:
-      `<div>
-        <div id="status"></div>
-      </div>`,
+      `<div id="status">`,
     });
 
     this.editor.BlockManager.add('div', {
@@ -183,8 +263,27 @@ class Constructor extends Component {
       `<span></span>`,
     });
 
-    this.editor.runCommand('preview');
-    document.getElementsByClassName("gjs-cv-canvas")[0].style.zIndex = 0;
+    // Стили внутри редактора
+    this.editor.setComponents('<script id="init_script" type="text/javascript" src="/static/minimal-react-webpack-babel-setup/dist/bundle.js"></script>');
+
+    this.editor.on('block:drag:stop', model => {
+      // alert(document.getElementsByClassName('gjs-frame')[0].contentWindow.document.getElementById('feed'));
+      // console.log(document.getElementsByClassName('gjs-frame')[0].contentWindow.document.getElementById('feed'));
+      try {
+        ReactDOM.render(
+          <Feed/>,
+          document.getElementsByClassName('gjs-frame')[0].contentWindow.document.getElementById('feed')
+        );
+      } catch (e) { }
+
+      try {
+        ReactDOM.render(
+          <Status/>,
+          document.getElementsByClassName('gjs-frame')[0].contentWindow.document.getElementById('status')
+
+        );
+      } catch (e) { }
+    });
   }
 }
 

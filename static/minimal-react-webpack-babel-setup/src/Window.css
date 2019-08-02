@@ -5,11 +5,16 @@
 
 .pseudoScreen{
     height: 100vmax;
-    width: 100vmax;
+    width: 0vmax;
+}
+
+.ECHeader{
+    margin-bottom: -3px;
 }
 
 .Leash{
-  width: 90%;
+  width: calc(100% - 45px);
+  margin-bottom: -3px;
   display: inline-block;
 }
 
@@ -34,7 +39,7 @@
 .toggleButton{
   display: inline-block;
   line-height: 30px;
-  width: 10%;
+  width: 45px;
   background-color: #141414;
   text-align: center;
   border-right: 1px solid white;

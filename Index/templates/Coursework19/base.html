@@ -7,7 +7,7 @@
 <body>
 {% load static %}
 
-<div style="height: 5%;">
+<div class="Navigation" style="height: 5%;">
 	<nav>
 		<div class="nav_link">
 			<a href="{% url 'index'%}">main</a>
@@ -49,7 +49,15 @@
 {% block content %}
 {% endblock content %}
 
-<style type="text/css"></style>
-<script type="text/javascript" src="{% static 'minimal-react-webpack-babel-setup/dist/bundle.js' %}"></script>
+<script id="init_script" type="text/javascript" src="{% static 'minimal-react-webpack-babel-setup/dist/bundle.js' %}"></script>
+<style type="text/css">
+.gjs-cv-canvas {
+	top:0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+</style>
+
 </body>
 </html>

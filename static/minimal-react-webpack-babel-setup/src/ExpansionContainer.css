@@ -1,20 +1,23 @@
 .ExpansionContainer{
   min-width: 400px;
+  height: 400px;
   min-height: 100px;
   position: absolute;
-  box-shadow: 7px 6px 0px #aaaaaa;
+  box-shadow: 7px 6px 0px #dedede;
+  padding-bottom: 55px;
 }
 
 #scroller{
-  min-height: 100px;
+  /* min-height: 100px; */
   height: 100%;
   overflow: auto;
   margin: -1px;
   background-color: #141414;
   padding: 10px;
+  width: calc(100% - 21px);
   border-top: 3px solid white;
-  box-shadow: 6px 6px 0px #aaaaaa;
   border-left: 1px solid white;
+  border-right: 1px solid white;
   border-bottom: 1px solid white;
 }
 

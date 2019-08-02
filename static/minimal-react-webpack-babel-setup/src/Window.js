@@ -33,7 +33,7 @@ class Window extends Component {
         </div>
         <div class="pseudoScreen" ref={this.window}>
           <div className="ExpansionContainer" width={this.width} height={this.height} ref={this.currentComp}>
-            <div>
+            <div className="ECHeader">
               <Leash content={this.name}/>
               <div className="toggleButton">
                 <div ref={this.button}><p class="noselect">-</p></div>
@@ -110,6 +110,16 @@ class Window extends Component {
       this.timeOpened = Date.now();
     }
     this.isOpened = !this.isOpened;
+
+    this.window.current.childNodes[0].style.top = '37px';
+    this.window.current.childNodes[0].style.left = '8px';
+
+    if (maxZIndex.toString(10) !== this.window.current.childNodes[0].style.zIndex){
+      console.log("", (maxZIndex + 1).toString(10));
+      maxZIndex = maxZIndex + 1;
+      this.currentComp.current.style.zIndex = (maxZIndex).toString(10);
+    }
+
     this.window.current.style.opacity = '1.0'
   }
 }

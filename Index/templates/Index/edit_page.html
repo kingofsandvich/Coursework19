@@ -2,6 +2,44 @@
 
 {% load static %}
 {% block content %}
+<style>
+  .Navigation{
+    display: none;
+  }
+  @font-face{
+    font-family:'FontAwesome';
+    src:url("{% static '/fonts/fontawesome-webfont.ttf' %}");
+  }
+  .gjs-one-bg, .gjs-two-color{
+    color: white;
+    background-color: #141414;
+  }
+  .gjs-sm-title{
+    border-bottom: 1px solid white;
+  }
+  .cm-s-hopscotch.CodeMirror {
+    background: rgb(0,0,0,0.1);
+  }
+  .cm-s-hopscotch .CodeMirror-gutters {
+    background: rgb(0,0,0,0.1);
+    border-right: 0px;
+}
+.gjs-category-title, .gjs-sm-sector .gjs-sm-title, .gjs-clm-tags .gjs-sm-title, .gjs-block-category .gjs-title, .gjs-layer-title {
+    min-height: 26px;
+    border-bottom: 1px dashed white;
+}
+.gjs-block {
+    border: 1px solid white;
+  }
+  .gjs-pn-panel {
+    display: inline-block;
+    position: relative;
+  }
+  .gjs-cv-canvas__frames{
+    background-color: #282828;
+  }
+
+</style>
 <script src="https://unpkg.com/react@15/dist/react.js"></script>
 <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
 {% if user.is_authenticated %}

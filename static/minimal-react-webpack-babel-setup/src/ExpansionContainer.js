@@ -13,7 +13,10 @@ class ExpansionContainer extends Component {
   render() {
     return (
       <div className="ExpansionContainer" ref={this.currentComp}>
-        <Leash content="window"/>
+
+        <din className="ECHeader">
+          <Leash content="window"/>
+        </div>
           <div id="scroller">
             {this.props.children}
           </div>
