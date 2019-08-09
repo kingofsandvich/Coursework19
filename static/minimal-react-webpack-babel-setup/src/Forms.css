@@ -1,0 +1,217 @@
+.form_content{
+  /* background-color: #141414; */
+  /* min-height: 250px; */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+  text-align: center;
+  font-size: 17px;
+  border-top: none;
+}
+
+/* div{
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="1000 1000 800 600"><circle cx="400" cy="300" r="50" stroke-width="1000" stroke="#000" fill="#000" /></svg>') center center repeat;
+} */
+
+.form_content form{
+  background-color: #141414;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-size: 17px;
+}
+
+.form_content form input, select{
+  margin-top: 4px;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+  width: 100%;
+  padding: 3px 20px;
+  line-height: 19px;
+  border-radius: 2px;
+  border: 0px solid transparent;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.form_content form input[type="button"]:hover,.form_content form input[type="submit"]:hover{
+  background-color: #dd72ed;
+}
+.form_content form input[type="button"]:active,.form_content form input[type="submit"]:active{
+  background-color: #935599;
+}
+
+#passwordForm, #loginRegisterForm{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+}
+
+.PasswordForm, .LoginRegisterForm{
+   align-self: center;
+   width: 320px;
+}
+
+
+.form_header {
+  width: calc(100% + 2px);
+  display: flex;
+  margin-left: -2px;
+  align-items: flex-end;
+}
+
+.LRCorner:hover, .ULCorner:hover, .LRCorner.active, .ULCorner.active{
+  color: #935599;
+}
+
+.LRCorner.active, .ULCorner.active{
+  padding-bottom: 22px;
+  border-bottom: none;
+}
+
+.LRCorner, .ULCorner{
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+  text-align: center;
+  color: white;
+  margin: 0px;
+  height: 0px;
+  line-height: 14px;
+  padding-bottom: 17px;
+}
+
+/* _____________________________ */
+.LRCorner{
+  padding-top: 6px;
+  width: 100%;
+  background-color: #141414;
+  position: relative;
+  /* border-left: 1px solid white; */
+  margin: -1px;
+  border-top: 2px solid white;
+}
+
+.LRCorner:after, .LRCorner:before {
+ content: "";
+ position: absolute;
+ left: 0; right: 0;
+ margin-bottom: -37px;
+ bottom: 100%;
+ border-top: 14px solid #141414;
+ border-right: 14px solid transparent;
+}
+
+.LRCorner p{
+  padding-left: 40px;
+  color: white;
+  position:relative;
+  top:-5px;
+  margin: 0;
+}
+/* _____________________________ */
+.ULCorner{
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  width: 100%;
+  background-color: #141414;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.ULCorner:after, .ULCorner:before {
+ content: "";
+ position: absolute;
+ left: 0; right: 0;
+ bottom: 100%;
+ border-bottom: 14px solid #141414;
+ border-left: 14px solid transparent;
+}
+
+.ULCorner p{
+  padding-left: 40px;
+  color: white;
+  position:relative;
+  top:-5px;
+  margin: 0;
+}
+
+
+/* _____________________________ */
+.brand_checkbox {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: left;
+  border-bottom: 1px dashed white;
+  padding-bottom: 5px;
+}
+
+/* Hide the browser's default checkbox */
+.brand_checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checked {
+  position: absolute;
+    top: 4px;
+    right: 3px;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+}
+
+.brand_checkbox:hover input ~ .checked {
+  background-color: #ddd;
+}
+
+.checked:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.brand_checkbox input:checked ~ .checked:after {
+  display: block;
+}
+
+.brand_checkbox .checked:after {
+  left: 3px;
+  top: 3px;
+  border: solid #935599;
+  border-width: 7px;
+}
+
+.Radio .checked, .Radio .checked:after {
+  border-radius: 20px;
+}
+/* _____________________________ */
+
+select {
+  display: block;
+  margin-top: 4px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.tablink{
+  display: none;
+}
+
+.tablink.active{
+  display: block;
+}

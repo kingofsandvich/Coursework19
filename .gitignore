@@ -1,2 +1,6 @@
 *.pyc
+*.wt
 static/minimal-react-webpack-babel-setup/node_modules/
+MongoDB/
+MongoDB/journal/
+MongoDB/diagnostic.data/

@@ -4,12 +4,39 @@ import Feed from './Feed'
 import Constructor from './Constructor'
 import Window from './Window'
 import Status from './Status'
-
+import PasswordForm from './PasswordForm'
+import LoginRegisterForm from './LoginRegisterForm'
+import Leash from './Leash'
 
 try {
   ReactDOM.render(
     <Constructor/>,
     document.getElementById('constructor')
+  );
+} catch (e) {
+
+}
+try {
+  ReactDOM.render(
+    <PasswordForm/>,
+    document.getElementById('passwordForm')
+  );
+} catch (e) {
+
+}
+try {
+  ReactDOM.render(
+    <LoginRegisterForm/>,
+    document.getElementById('loginRegisterForm')
+  );
+} catch (e) {
+
+}
+
+try {
+  ReactDOM.render(
+    <Leash/>,
+    document.getElementById('leash')
   );
 } catch (e) {
 
