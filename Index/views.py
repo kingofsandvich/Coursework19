@@ -14,7 +14,10 @@ def home(request):
 	return render(request, 'Index/index.html', {'html': html, 'css':css})
 
 def red_home(request):
-	return redirect('index');
+	if request.user.is_authenticated:
+		return redirect('index')
+	else:
+		return redirect('enter_site')
 
 def edit_page(request):
 	return render(request, 'Index/edit_page.html')#, {'html': html, 'css':css})

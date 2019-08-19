@@ -22,6 +22,18 @@ button, input[type="submit" i] {
   text-align: center;
 }
 
+#icon{
+  height: 4vh;
+  margin-top: -0.5vh;
+  margin-right: 5vw;
+}
+
+#icon-left{
+  height: 4vh;
+  margin-top: -0.3vh;
+  margin-left: 5vw;
+}
+
 a:link{
   color: white;
 }
@@ -35,15 +47,18 @@ a:visited {
   color: white;
 }
 nav{
-    display: inline-block;
-    top:0;
-    left:0;
-    width: 100%;
-    background-color: #141414;
-    border-bottom: 1px solid grey;
-    color: white;
-    height: 100%;
-    text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #141414;
+  border-bottom: 1px solid grey;
+  color: white;
+  height: 5vh;
+  text-align: center;
 }
 
 fieldset{
@@ -59,7 +74,7 @@ fieldset{
 
 .nav_link{
   border-left: 2px solid white;
-  line-height: 45px;
+  line-height: 5vh;
   width: 100px;
   height: 100%;
   display: inline-block;

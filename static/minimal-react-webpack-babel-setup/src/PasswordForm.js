@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './Forms.css';
 
 // function openTab(evt, tabName) {
@@ -24,46 +25,37 @@ class PasswordForm extends Component {
       // this.height = props.height;
       // this.width =  props.width;
       //
-      // this.loginLink      = React.createRef();
+      // console.log(this.props.children);
+      // this.parentContent =  this.props.children;//.replace('<', '&lt;').replace('>', '&gt;');;
+      // Object.assign({}, document.getElementById('passwordForm'));
+      // document.getElementById('passwordForm').parentNode.id = "";
+      // alert(this.parentContent);
+      // console.log(this.parentContent);
+
+      this.edit   = React.createRef();
+      this.userUpdate = React.createRef();
+
+      this.addSource = React.createRef();
+      this.userForm = React.createRef();
+      this.message = React.createRef();
+
+      // console.log(ReactDOM.findDOMNode(this));
+      // this.whole       = React.createRef();
       // this.registerLink   = React.createRef();
       // this.login          = React.createRef();
       // this.register       = React.createRef();
       //
-      // this.loginButtonClick    = this.loginButtonClick.bind(this);
+      this.updating    = this.updating.bind(this);
+      this.addingSource    = this.addingSource.bind(this);
+
       // this.registerButtonClick = this.registerButtonClick.bind(this);
       //
       // // this.openTab = this.openTab.bind(this);
-      // this.openLog= this.openLog.bind(this);
-      // this.openReg= this.openReg.bind(this);
+      // this.alert= this.alert.bind(this);
+      this.csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+      // this.changeVis = this.changeVis.bind(this);
   }
   render() {
-    // <form>
-    //   <input type="text" placeholder="mail"></input>
-    //   <input type="submit" value="submit"></input>
-    //
-    //   <input type="button" onclick="alert('Hello World!')" value="Click Me!"></input>
-    //
-    //   <select name="cars">
-    //     <option value="volvo">Volvo</option>
-    //     <option value="saab">Saab</option>
-    //     <option value="fiat">Fiat</option>
-    //     <option value="audi">Audi</option>
-    //   </select>
-    //
-    //   <label class="brand_checkbox">Two
-    //     <input type="checkbox"></input>
-    //     <span class="checked"></span>
-    //   </label>
-    //
-    //   <label class="brand_checkbox Radio">Two
-    //     <input type="radio" name="radio"></input>
-    //     <span class="checked"></span>
-    //   </label>
-    //   <label class="brand_checkbox Radio">Two
-    //     <input type="radio"  name="radio"></input>
-    //     <span class="checked"></span>
-    //   </label>
-    // </form>
     return (
       <div className="PasswordForm">
           <div className="form_header">
@@ -73,12 +65,13 @@ class PasswordForm extends Component {
           </div>
           <div className="form_content">
             <div id="login" className="tablink active">
-              <form>
-                <input type="text" title="mail" placeholder="mail"></input>
-                <input type="text" title="login" placeholder="login"></input>
-                <input type="text" title="password" placeholder="password"></input>
-                <input type="text" title="repeat password" placeholder="repeator password"></input>
-                <input type="button" value="update"></input>
+              <form ref={this.userForm}>
+                <input autocomplete="new-password" type="text" name="mail" title="mail" placeholder="mail"></input>
+                <input autocomplete="new-password" type="text" name="username" title="username" placeholder="username"></input>
+                <input autocomplete="new-password" type="password" name="password" title="password" placeholder="password"></input>
+                <input autocomplete="new-password" type="password" name="repeat_password" title="repeat password" placeholder="repeator password"></input>
+                <input type="button" value="update" ref={this.userUpdate}></input>
+                <label ref={this.message}></label>
               </form>
               <div className="APIs">
                 <div className="APIform form_content">
@@ -99,7 +92,7 @@ class PasswordForm extends Component {
                       <input type="radio"  name="auth"></input>
                       <span class="checked"></span>
                     </label>
-                    <input type="button" value="edit"></input>
+                    <input type="button" value="edit" ref={this.edit}></input>
                     аккаунт не доступен
                     <br/>
                     использовать?
@@ -110,50 +103,103 @@ class PasswordForm extends Component {
                   </form>
                 </div>
               </div>
-              <div id="title" className="LRCorner">
+              <div ref={this.addSource} id="title" className="LRCorner">
                 +
               </div>
             </div>
           </div>
       </div>
     );
-  }// <button  className="UpperBottom">Upper</button >
-  //      <button  className="LowerBottom">Lower</button >
-  // componentDidMount(){
-  //   this.loginLink.current.onclick = this.openLog;
-  //   this.registerLink.current.onclick = this.openReg;
-  //
-  //
-  //   // this.login.current.style.display = 'block';
-  //   // this.register.current.style.display = 'none';
-  //   this.registerLink.current.className += " active";
-  //   this.register.current.className += " active";
-  // }
-  // openReg(){
-  //   if (!this.register.current.className.includes("active")){
-  //     this.loginLink.current.className = this.loginLink.current.className.replace(" active","");
-  //     this.login.current.className = this.login.current.className.replace(" active","");
-  //
-  //     this.registerLink.current.className += " active";
-  //     this.register.current.className += " active";
-  //   }
-  // }
-  // openLog(){
-  //   if (!this.login.current.className.includes("active")){
-  //     this.registerLink.current.className = this.registerLink.current.className.replace(" active","");
-  //     this.register.current.className = this.register.current.className.replace(" active","");
-  //
-  //     this.login.current.className += " active";
-  //     this.loginLink.current.className += " active";
-  //   }
-  // }
-  // loginButtonClick(){
-  //   alert("login");
-  // }
-  //
-  // registerButtonClick(){
-  //   alert("register");
-  // }
+  }
+  componentDidMount(){
+    this.userUpdate.current.onclick = this.updating;
+    this.addSource.current.onclick = this.addingSource;
+
+    let data = new FormData();
+    let userForm = this.userForm.current;
+    let message = this.message.current;
+
+    data.append('csrfmiddlewaretoken', this.csrf);
+    fetch("/userInfo/", {
+        method: 'POST',
+        body: data,
+        credentials: 'same-origin',
+    }).then(function(response) {
+      if (response.ok) {
+        return response.json();           // корректный ответ
+      } else {
+        throw Error(response.statusText); // ошибка на сервере
+      }
+    }).then(function(myJson) {
+      let json = JSON.parse(JSON.stringify(myJson));
+
+      userForm.elements['username'].value = json['username'];
+      userForm.elements['mail'].value = json['mail'];
+    }).catch(function(error) {
+      message.appendChild(document.createTextNode('error: can not get user\'s data'));
+    });
+  }
+
+  updating(){
+    let data = new FormData(this.userForm.current);
+    let updMessage = this.message.current;
+
+    data.append('csrfmiddlewaretoken', this.csrf);
+
+    // удаление сообщений об ошибках
+    while (updMessage.firstChild) {
+        updMessage.removeChild(updMessage.firstChild);
+    }
+    // проверяем правильность заполнения формы
+    if(this.userForm.current.checkValidity()){
+      // обрабатываем POST запрос с формой
+      fetch("/userUpdate/", {
+          method: 'POST',
+          body: data,
+          credentials: 'same-origin',
+      }).then(function(response) {
+        if (response.ok) {
+          return response.json();           // корректный ответ
+        } else {
+          throw Error(response.statusText); // ошибка на сервере
+        }
+      }).then(function(myJson) {
+        let json = JSON.parse(JSON.stringify(myJson));
+        // сообщение, что все правильно
+        if (!json['mail_error']){
+          updMessage.appendChild(document.createTextNode("mail changed; "));
+        } else {
+          updMessage.appendChild(document.createTextNode(json['mail_error']));
+        }
+
+        if (!json['username_error']){
+          updMessage.appendChild(document.createTextNode("username changed; "));
+        } else {
+          updMessage.appendChild(document.createTextNode(json['username_error']));
+        }
+
+        if (!json['password_error']){
+          updMessage.appendChild(document.createTextNode("password changed; "));
+        } else {
+          updMessage.appendChild(document.createTextNode(json['password_error']));
+        }
+
+      }).catch(function(error) {
+        // обработка ошибок
+        let message = document.createTextNode((""+error).toLowerCase());
+        updMessage.appendChild(message);
+      });
+
+    } else {
+      // обработка ошибок
+      let message = document.createTextNode('error: the form should be filled properly');
+      updMessage.appendChild(message);
+    }
+  }
+
+  addingSource(){
+    alert('adding new source');
+  }
 }
 
 export default PasswordForm;

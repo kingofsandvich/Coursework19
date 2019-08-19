@@ -17,13 +17,12 @@ try {
 
 }
 try {
-  ReactDOM.render(
-    <PasswordForm/>,
-    document.getElementById('passwordForm')
-  );
-} catch (e) {
+  let elems = document.getElementsByClassName("passwordForm");
+  for (let i = 0; i < elems.length; i++) {
+    ReactDOM.render(<PasswordForm>{elems[i].childNodes}</PasswordForm>, elems[i]);
+  }
+} catch (e) { }
 
-}
 try {
   ReactDOM.render(
     <LoginRegisterForm/>,

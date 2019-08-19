@@ -2,13 +2,20 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>coursework</title>
+	{% load static %}
+	<link rel="shortcut icon" type="image/png" href="{% static 'favicon_black.ico' %}"/>
+	<style>
+	  .Navigation{
+	    display: none;
+	  }
+	</style>
 </head>
 <body>
-{% load static %}
-
+{% csrf_token %}
 <div class="Navigation" style="height: 5%;">
 	<nav>
+		<svg id="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 640 640" width="40" height="40"><defs><path d="M356.34 176.15L401.72 266.91L310.96 266.91L220.2 266.91L265.57 176.15L310.96 85.38L356.34 176.15Z" id="d5iilslPX"></path><path d="M265.76 357.67L311.14 448.43L220.37 448.43L129.62 448.43L174.99 357.67L220.37 266.91L265.76 357.67Z" id="caPEmc2AB"></path><path d="M447.1 357.67L492.48 448.43L401.72 448.43L310.96 448.43L356.34 357.67L401.72 266.91L447.1 357.67Z" id="b3E3SboPOh"></path><path d="M175 539.19L220.38 629.95L129.61 629.95L38.85 629.95L84.23 539.19L129.61 448.43L175 539.19Z" id="e2TytHoc8d"></path><path d="M356.34 539.19L401.72 629.95L310.96 629.95L220.2 629.95L265.57 539.19L310.96 448.43L356.34 539.19Z" id="a1mD3HobTC"></path><path d="M537.86 539.19L583.24 629.95L492.48 629.95L401.72 629.95L447.1 539.19L492.48 448.43L537.86 539.19Z" id="aWCSCqfD"></path></defs><g><g><g><use xlink:href="#d5iilslPX" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#d5iilslPX" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#caPEmc2AB" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#caPEmc2AB" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#b3E3SboPOh" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#b3E3SboPOh" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#e2TytHoc8d" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#e2TytHoc8d" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#a1mD3HobTC" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#a1mD3HobTC" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#aWCSCqfD" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#aWCSCqfD" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use></g></g></g></g></svg>
 		<div class="nav_link">
 			<a href="{% url 'index'%}">main</a>
 		</div>
@@ -19,21 +26,19 @@
 		<div class="nav_link">
 			<a href="{% url 'edit_page'%}">edit page</a>
 		</div>
-
 		<div class="nav_link">
 			<a href="{% url 'porcess_vk_auth'%}">login vk</a>
 		</div>
+		<div id="icon-left">
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 640 640" width="40" height="40"><defs><path d="M561.3 306.59C561.3 442.97 450.58 553.7 314.2 553.7C177.82 553.7 67.1 442.97 67.1 306.59C67.1 170.22 177.82 59.49 314.2 59.49C450.58 59.49 561.3 170.22 561.3 306.59Z" id="bxELRNCJm"></path><path d="M395.4 260.27C395.4 305.08 359.02 341.47 314.2 341.47C269.39 341.47 233.01 305.08 233.01 260.27C233.01 215.46 269.39 179.08 314.2 179.08C359.02 179.08 395.4 215.46 395.4 260.27Z" id="o7ksmz4KVF"></path><path d="M178.88 381.31L453.52 381.31L453.52 477.97L178.88 477.97L178.88 381.31Z" id="a5qQs6dmWP"></path><path d="M453.52 381.31C453.52 392.52 391.99 401.62 316.2 401.62C240.41 401.62 178.88 392.52 178.88 381.31C178.88 370.1 240.41 360.99 316.2 360.99C391.99 360.99 453.52 370.1 453.52 381.31Z" id="c3EGU7NHro"></path><path d="M453.52 478.63C453.52 501.45 391.99 519.97 316.2 519.97C240.41 519.97 178.88 501.45 178.88 478.63C178.88 455.82 240.41 437.29 316.2 437.29C391.99 437.29 453.52 455.82 453.52 478.63Z" id="fgKX2DHYr"></path></defs><g><g><g><use xlink:href="#bxELRNCJm" opacity="1" fill="#ffffff" fill-opacity="0"></use><g><use xlink:href="#bxELRNCJm" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="15" stroke-opacity="1"></use></g></g><g><use xlink:href="#o7ksmz4KVF" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#o7ksmz4KVF" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#a5qQs6dmWP" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#a5qQs6dmWP" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#c3EGU7NHro" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#c3EGU7NHro" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#fgKX2DHYr" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#fgKX2DHYr" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="1" stroke-opacity="1"></use></g></g></g></g></svg>
+		</div>
 	  {% else %}
-
 		<div class="nav_link">
 			<a href="{% url 'login'%}">login</a>
 		</div>
-
 		<div class="nav_link">
 			<a href="{% url 'register'%}">register</a>
 		</div>
-
-
 	  {% endif %}
 	</nav>
 </div>
@@ -45,17 +50,50 @@
 		</div>
 	{% endfor %}
 {% endif %}
+<style>
+	#passwordForm{
+		display: none;
+	}
+</style>
+
+{% if user.is_authenticated %}
+<div class="passwordForm" id="passwordForm"></div>
+{% endif %}
 
 {% block content %}
 {% endblock content %}
 
 <script id="init_script" type="text/javascript" src="{% static 'minimal-react-webpack-babel-setup/dist/bundle.js' %}"></script>
+
+{% if user.is_authenticated %}
+<script type="text/javascript">
+	var passwordForm = document.getElementById("passwordForm");
+	var icon = document.getElementById("icon-left");
+	passwordForm.style.opacity = "0";
+
+	icon.onclick = function() {
+		if(passwordForm.style.opacity === "0"){
+			passwordForm.style.opacity = "1.0";
+			passwordForm.style.pointerEvents  = "all";
+		} else {
+			passwordForm.style.opacity = "0.0";
+			passwordForm.style.pointerEvents  = "none";
+		}
+	};
+</script>
+<script type="text/javascript">
+	passwordForm.style.display = "flex";
+</script>
+{% endif %}
 <style type="text/css">
 .gjs-cv-canvas {
 	top:0;
 	width: 100%;
 	height: 100%;
 	z-index: 0;
+}
+.Navigation{
+	display: block;
 }
 </style>
 

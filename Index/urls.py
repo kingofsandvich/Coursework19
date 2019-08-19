@@ -1,8 +1,7 @@
-from django.contrib import admin
-from django.urls import path
-from . import views
+from rest_framework import routers
+from .api import PageContentViewSet
 
-urlpatterns = [
-    path('index/', views.home, name="index"),
-    path('edit_page/', views.edit_page, name="edit_page"),
-]
+router = routers.DefaultRouter()
+router.register('api/data', PageContentViewSet, 'page_content')
+
+urlpatterns = router.urls

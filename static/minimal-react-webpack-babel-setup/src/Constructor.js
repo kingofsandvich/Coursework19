@@ -14,6 +14,7 @@ import grapesjs from 'grapesjs';
 import exportGrapes from 'grapesjs-plugin-export';
 import './../node_modules/grapesjs/dist/css/grapes.min.css';
 
+"use strict";
 var elem = document.getElementById('constructor');
 
 function openFullscreen() {
@@ -28,13 +29,35 @@ function openFullscreen() {
 class Constructor extends Component {
   constructor(props){
       super(props);
+
+      // window.alert = function () {  };
+      // alert('qwerty');
+      //
+      // window.confirm = function () {  };
+      // window.confirm();
+      //
+      // window.onbeforeunload=  function () { };
+      // window.onbeforeunload();
+
       this.save = this.save.bind(this);
       this.cancel = this.cancel.bind(this);
+      this.csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+      // window.confirm = function() { return false; };
+      // window.onbeforeunload = function() { return false; };
+      //
+      // window.addEventListener('beforeunload', function (e) {
+      //   // Cancel the event
+      //   e.preventDefault();
+      //   // Chrome requires returnValue to be set
+      //   // e.returnValue = '';
+      // });
   }
   render() {
     return (
       <div className="Constructor">
-        <div id="gjs"></div>
+        <div id="gjs">
+
+        </div>
         <div className="constrBar">
           <div className="toggleSwitch save" onClick={this.save}>
             <p className="noselect" id="constrButton">save</p>
@@ -59,22 +82,72 @@ class Constructor extends Component {
       </div>
     );
   }
-  cancel(){ window.open(window.location.origin + "/index/",'_self');}
+  cancel(){
+    // window.confirm = function() { return false; };
+    // window.onbeforeunload = function() { return false; };
+    // window.open(window.location.origin + "/index/",'_self');
+    window.location.replace(window.location.protocol + "//" + window.location.host + '/index');
+  }
   save(){
     let html = this.editor.getHtml();
     let css = this.editor.getCss();
-    let data =  JSON.stringify({ 'html' : html, 'css': css })
-    let message = "?data=" + encodeURIComponent(data);
-    let url = window.location.origin + "/style/";
-    window.open(url + message, '_self');
+    // let data =  JSON.stringify({ 'html' : html, 'css': css })
+    // let message = "?data=" + encodeURIComponent(data);
+    // let url = window.location.origin + "/style/";
+    // window.open(url + message, '_self');
+
+    // POST
+    let data = new FormData();
+    data.append('csrfmiddlewaretoken', this.csrf);
+    data.append('html', html);
+    data.append('css', css);
+
+    fetch("/style/set/", {
+        method: 'POST',
+        body: data,
+        credentials: 'same-origin',
+    }).then(function(response) {
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/index');
+    }).catch(function(error) {
+        console.log('error in processing new page styles on server');
+    });
   }
   componentDidMount(){
+    let css = '';
+    let html = '';
+    let data = new FormData();
+    data.append('csrfmiddlewaretoken', this.csrf);
+
+
+    // let request = async () => {
+    //     let response = await fetch("/style/get/", {
+    //         method: 'POST',
+    //         body: data,
+    //         credentials: 'same-origin',
+    //     });
+    //     let json = await response.json();
+    //     json = JSON.parse(JSON.stringify(json));
+    //     css = json['css'];
+    //     html = json['html'];
+    //     console.log(json['css']);
+    //     console.log(json['html']);
+    //     console.log(json);
+    //     console.table(json);
+    //     console.log(json);
+    // }
+    //
+    // request();
+
+
+    // request();
+
     this.editor = grapesjs.init({
           plugins : [exportGrapes],
           pluginsOpts: {
             [exportGrapes]:{}
           },
           allowScripts: 1,
+          // protectedCss: css,
           container: '#gjs',
           fromElement: true,
           height: '100%',
@@ -263,8 +336,42 @@ class Constructor extends Component {
       `<span></span>`,
     });
 
-    // Стили внутри редактора
-    this.editor.setComponents('<script id="init_script" type="text/javascript" src="/static/minimal-react-webpack-babel-setup/dist/bundle.js"></script>');
+    let editor = this.editor;
+    fetch("/style/get/", {
+        method: 'POST',
+        body: data,
+        credentials: 'same-origin',
+    }).then(function(response) {
+      return response.json();
+    }).then(function(myJson) {
+      let json = JSON.parse(JSON.stringify(myJson));
+
+      if (json['error']) {
+        throw Error(json['error']);
+      }
+      css = json['css'];
+      html = json['html'];
+
+      console.log(editor.Canvas);
+      console.log(editor);
+
+      // console.log(json['css']);
+      // console.log(json['html']);
+      // console.log(json);
+      // console.table(json);
+      // Стили внутри редактора
+      let react_script = '<script id="init_script" type="text/javascript" src="/static/minimal-react-webpack-babel-setup/dist/bundle.js"></script>';
+      // editor.DomComponents.getWrapper().setStyle(css);
+      editor.setStyle(css);
+      editor.setComponents(html);
+
+      if (!html.includes(react_script)){
+      editor.setComponents(react_script);
+      }
+    }).catch(function(error) {
+        console.log('error in processing new page styles on server');
+    });
+
 
     this.editor.on('block:drag:stop', model => {
       // alert(document.getElementsByClassName('gjs-frame')[0].contentWindow.document.getElementById('feed'));

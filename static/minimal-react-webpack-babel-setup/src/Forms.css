@@ -42,13 +42,52 @@
   background-color: #935599;
 }
 
-#passwordForm, #loginRegisterForm{
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: space-around;
+form label{
+    font-size: 13px;
 }
 
+#passwordForm, #loginRegisterForm{
+  width: 100vw;
+  height: 95vh;
+  display: flex;
+  justify-content: space-around;
+
+  background-size: 400% 400%;
+
+  -webkit-animation: AnimationName 4s ease infinite;
+  -moz-animation: AnimationName 4s ease infinite;
+  -o-animation: AnimationName 4s ease infinite;
+  animation: AnimationName 4s ease infinite;
+}
+#passwordForm{
+  position: absolute;
+  display: none;
+  transition: opacity 0.4s ease-in-out;
+  background: linear-gradient(3deg, rgba(245,143,255,0.8), rgba(242,178,178,0.8));
+}
+#loginRegisterForm{
+  background: linear-gradient(3deg, #f58fff, #f2b2b2);
+}
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 7%}
+    50%{background-position:100% 94%}
+    100%{background-position:0% 7%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 7%}
+    50%{background-position:100% 94%}
+    100%{background-position:0% 7%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 7%}
+    50%{background-position:100% 94%}
+    100%{background-position:0% 7%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 7%}
+    50%{background-position:100% 94%}
+    100%{background-position:0% 7%}
+}
 .PasswordForm, .LoginRegisterForm{
    align-self: center;
    width: 320px;
