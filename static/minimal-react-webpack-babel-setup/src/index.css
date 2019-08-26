@@ -26,12 +26,14 @@ button, input[type="submit" i] {
   height: 4vh;
   margin-top: -0.5vh;
   margin-right: 5vw;
+  min-height: 40px;
 }
 
 #icon-left{
   height: 4vh;
   margin-top: -0.3vh;
   margin-left: 5vw;
+  min-height: 40px;
 }
 
 a:link{
@@ -58,6 +60,7 @@ nav{
   border-bottom: 1px solid grey;
   color: white;
   height: 5vh;
+  min-height: 40px;
   text-align: center;
 }
 
@@ -72,9 +75,15 @@ fieldset{
   overflow: auto;
 }
 
+.nav_link_right{
+  border-right: 2px solid white;
+  width: 2px;
+  height: 100%;
+}
+
 .nav_link{
   border-left: 2px solid white;
-  line-height: 5vh;
+  line-height: 270%;
   width: 100px;
   height: 100%;
   display: inline-block;

@@ -117,7 +117,12 @@ class VKAuth(object):
         api_version = self.api_v
 
         auth_url_template = '{0}?client_id={1}&scope={2}&redirect_uri={3}&display={4}&v={5}&response_type=token'
-        auth_url = auth_url_template.format(api_auth_url, app_id, ','.join(permissions), redirect_uri, display, api_version)
+        auth_url = auth_url_template .format(api_auth_url,
+                                            app_id,
+                                            ','.join(permissions),
+                                            redirect_uri,
+                                            display,
+                                            api_version)
 
         self.response = self.session.get(auth_url)
 
@@ -186,7 +191,8 @@ class VKAuth(object):
 
         # now get _access_token and _user_id
         self._get_params()
-
+        print('Code: ', code)
+        print('closing')
         # close current session
         self._close()
 
@@ -278,7 +284,15 @@ class VKAuth(object):
             self._submit_form({})
 
     def _get_params(self):
+        # print("self.response.url: ")
+        # print(self.response.url)
+        # print(type(self.response.url))
+        # print()
 
+        # params = self.response.url.split('#')[1].split('&')
+        #
+        # self._access_token = params[0].split('=')[1]
+        # self._user_id = params[2].split('=')[1]
         try:
             params = self.response.url.split('#')[1].split('&')
             self._access_token = params[0].split('=')[1]

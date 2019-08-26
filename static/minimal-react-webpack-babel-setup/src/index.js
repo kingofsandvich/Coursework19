@@ -7,6 +7,7 @@ import Status from './Status'
 import PasswordForm from './PasswordForm'
 import LoginRegisterForm from './LoginRegisterForm'
 import Leash from './Leash'
+// import AuthForm from './AuthForm';
 
 try {
   ReactDOM.render(

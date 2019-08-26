@@ -21,17 +21,17 @@
   border-bottom: 1px solid white;
 }
 
-#scroller::-webkit-scrollbar {
+#scroller::-webkit-scrollbar, .scroller::-webkit-scrollbar {
     width: 0.5em;
     background-color: #141414;
 }
 
-#scroller::-webkit-scrollbar-track {
+#scroller::-webkit-scrollbar-track, .scroller::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px #141414;
 
 }
 
-#scroller::-webkit-scrollbar-thumb {
+#scroller::-webkit-scrollbar-thumb, .scroller::-webkit-scrollbar-thumb {
   background-color: white;
   outline: 10px solid black;
 }

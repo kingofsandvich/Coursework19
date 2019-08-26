@@ -147,7 +147,7 @@ class Constructor extends Component {
             [exportGrapes]:{}
           },
           allowScripts: 1,
-          // protectedCss: css,
+          protectedCss: '',
           container: '#gjs',
           fromElement: true,
           height: '100%',

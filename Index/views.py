@@ -11,6 +11,7 @@ def home(request):
 	if request.user.is_authenticated:
 		html = request.user.profile.html
 		css = request.user.profile.css
+	
 	return render(request, 'Index/index.html', {'html': html, 'css':css})
 
 def red_home(request):

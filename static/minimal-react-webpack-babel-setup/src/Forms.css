@@ -1,6 +1,10 @@
+.AuthForm {
+    border-top: 3px solid white;
+}
+
 .form_content{
   /* background-color: #141414; */
-  /* min-height: 250px; */
+  min-height: 145px;
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
@@ -8,11 +12,19 @@
   text-align: center;
   font-size: 17px;
   border-top: none;
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* div{
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="1000 1000 800 600"><circle cx="400" cy="300" r="50" stroke-width="1000" stroke="#000" fill="#000" /></svg>') center center repeat;
 } */
+
+form h4 {
+  margin: 0px;
+  margin-top: 5px;
+}
 
 .form_content form{
   background-color: #141414;
@@ -183,6 +195,7 @@ form label{
 
 /* _____________________________ */
 .brand_checkbox {
+  font-size: 17px;
   display: block;
   position: relative;
   cursor: pointer;
@@ -191,7 +204,7 @@ form label{
   -ms-user-select: none;
   user-select: none;
   text-align: left;
-  border-bottom: 1px dashed white;
+  /* border-bottom: 1px dashed white; */
   padding-bottom: 5px;
 }
 

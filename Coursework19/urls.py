@@ -19,6 +19,8 @@ urlpatterns = [
     # path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
 
     # path('es/',user_views.enter_site),
+    path('deleteSource/',user_views.deleteSource),
+    path('setSource/',user_views.setSource),
     path('userInfo/',user_views.userInfo),
     path('userUpdate/',user_views.userUpdate),
     path('loginAJAX/',user_views.loginAJAX),
