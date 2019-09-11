@@ -3,6 +3,13 @@ body{
   overflow: hidden;
 }
 
+.save :hover{
+  color: green;
+}
+.cancel :hover{
+  color: red;
+}
+
 #gjs {
   border: 3px solid #444;
   margin: 0;
@@ -37,9 +44,29 @@ body{
   height: 30px;
   width: 100vmax;
   position: fixed;
+  display: flex;
   top: 0;
   left: 0;
   background-color: #141414;
+}
+
+.pageName{
+  width: 150px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.pageName input {
+    width: 130px;
+    padding-left: 20px;
+    background-color: #141414;
+    color: #935599;
+    font-weight: bold;
+    font-size: 16px;
+    height: 30px;
+    outline: none;
+    border: none;
 }
 
 .panel__top {

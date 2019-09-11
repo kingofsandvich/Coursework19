@@ -3,6 +3,8 @@ from picklefield.fields import PickledObjectField
 from django.contrib.auth.models import User
 
 class Page(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.TextField(default='')
     css = models.TextField(default='')
     html = models.TextField(default='')
 

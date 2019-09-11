@@ -3,18 +3,23 @@
 }
 
 .form_content{
-  /* background-color: #141414; */
+  text-align: center;
+  font-size: 17px;
+  border-top: none;
+}
+
+
+
+.scrollable_content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 60vh;
   min-height: 145px;
+
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
-  text-align: center;
-  font-size: 17px;
-  border-top: none;
-  max-height: 60vh;
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 
 /* div{
@@ -64,6 +69,10 @@ form label{
   display: flex;
   justify-content: space-around;
 
+  /* background: linear-gradient(3deg, #f58fff, #f2b2b2); */
+  background: linear-gradient(3deg, rgba(245,143,255,0.8), rgba(242,178,178,0.8));
+
+
   background-size: 400% 400%;
 
   -webkit-animation: AnimationName 4s ease infinite;
@@ -75,29 +84,29 @@ form label{
   position: absolute;
   display: none;
   transition: opacity 0.4s ease-in-out;
-  background: linear-gradient(3deg, rgba(245,143,255,0.8), rgba(242,178,178,0.8));
+  /* background: linear-gradient(3deg, rgba(245,143,255,0.8), rgba(242,178,178,0.8)); */
 }
 #loginRegisterForm{
-  background: linear-gradient(3deg, #f58fff, #f2b2b2);
+  /* background: linear-gradient(3deg, #f58fff, #f2b2b2); */
 }
 @-webkit-keyframes AnimationName {
     0%{background-position:0% 7%}
-    50%{background-position:100% 94%}
+    50%{background-position:100% 50%}
     100%{background-position:0% 7%}
 }
 @-moz-keyframes AnimationName {
     0%{background-position:0% 7%}
-    50%{background-position:100% 94%}
+    50%{background-position:100% 50%}
     100%{background-position:0% 7%}
 }
 @-o-keyframes AnimationName {
     0%{background-position:0% 7%}
-    50%{background-position:100% 94%}
+    50%{background-position:100% 50%}
     100%{background-position:0% 7%}
 }
 @keyframes AnimationName {
     0%{background-position:0% 7%}
-    50%{background-position:100% 94%}
+    50%{background-position:100% 50%}
     100%{background-position:0% 7%}
 }
 .PasswordForm, .LoginRegisterForm{
@@ -266,4 +275,9 @@ select {
 
 .tablink.active{
   display: block;
+}
+
+.leftCorner {
+  border-left: none;
+  margin-left: 2px;
 }

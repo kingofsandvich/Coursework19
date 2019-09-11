@@ -45,6 +45,7 @@
 
 {% if user.is_authenticated %}
     {% csrf_token %}
+    <div id="page_id" style="display: none;"> {{id}} </div>
     <div id="constructor"></div>
 {% endif %}
 

@@ -175,11 +175,11 @@ class PasswordForm extends Component {
     return (
       <div className="PasswordForm">
           <div className="form_header">
-            <div className="ULCorner">
+            <div className="ULCorner leftCorner">
               Profile
             </div>
           </div>
-          <div className="form_content scroller">
+          <div className="form_content scrollable_content">
             <div id="login" className="tablink active">
               <form ref={this.userForm}>
                 <input autoComplete="new-password" type="text" name="mail" title="mail" placeholder="mail"></input>

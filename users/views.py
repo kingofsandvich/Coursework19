@@ -11,7 +11,8 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, API
+from .models import Profile, API, Page
+from django.contrib.auth import logout
 
 def enter_site(request):
     if request.user.is_authenticated:
@@ -138,15 +139,21 @@ def registerAJAX(request):
             return HttpResponse(json.dumps(response_data), content_type="application/json")
         # регистрация
         user, created = User.objects.get_or_create(username=username, email=mail)
+        pagenames = ['main', 'another', 'other', 'else']
         if created:
+            for i in range(4):
+                new_page = Page(name=pagenames[i], css='', html=pagenames[i] + ' page!')
+                new_page.save()
+                user.profile.pages.add(new_page)
+            user.profile.save()
             user.set_password(password)
             user.save()
             login(request, user)
             response_data['url'] = '/index'
-            return HttpResponse(json.dumps(response_data), content_type="application/json")
         else:
             response_data['error'] = 'could not create such a user'
-            return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
         # user = authenticate(username = username, password = password)
         # if user is not None:
         #     # аутентификация успешна
@@ -567,14 +574,6 @@ def set_page(request):
     else:
         response_data['error'] = 'wrong request method'
     return HttpResponse(json.dumps(response_data), content_type="application/json")
-    # try:
-    #     data = json.loads(request.GET['data'])
-    #     request.user.profile.html = data['html']
-    #     request.user.profile.css = data['css']
-    #     request.user.profile.save()
-    #     return redirect('index')
-    # except Exception as e:
-    #     print('error in editing styles (url: /style/)')
 
 @login_required
 def get_page(request):
@@ -588,6 +587,45 @@ def get_page(request):
     else:
         response_data['error'] = 'wrong request method'
     return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+def log_out(request):
+    logout(request)
+    return redirect('enter_site')
+
+@login_required
+def set_page2(request, page_id):
+    response_data = {}
+    if request.method == 'POST':
+        if request.user.is_authenticated: # авторизованный AJAX
+            page = Page.objects.get(id=page_id)
+            page.css = request.POST['css']
+            page.html = request.POST['html']
+            page.name = request.POST['name']
+            page.save()
+            response_data['status'] = 'page changed'
+        else:
+            response_data['error'] = 'user not authenticated'
+    else:
+        response_data['error'] = 'wrong request method'
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+@login_required
+def get_page2(request, page_id):
+    response_data = {}
+    if request.method == 'POST':
+        if request.user.is_authenticated: # авторизованный AJAX
+            # request.user.profile
+            page = Page.objects.get(id=page_id)
+            response_data['css'] = page.css
+            response_data['html'] = page.html
+            response_data['name'] = page.name
+            response_data['id'] = page_id
+        else:
+            response_data['error'] = 'user not authenticated'
+    else:
+        response_data['error'] = 'wrong request method'
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
 
 # Create your views here.
 def register(request):

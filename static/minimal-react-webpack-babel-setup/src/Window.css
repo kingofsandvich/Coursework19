@@ -33,7 +33,7 @@
   color: white;
 }
 .toggleSwitch > p:hover{
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 .toggleButton{

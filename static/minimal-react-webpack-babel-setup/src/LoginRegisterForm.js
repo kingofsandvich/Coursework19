@@ -46,7 +46,7 @@ class LoginRegisterForm extends Component {
     return (
       <div className="LoginRegisterForm">
           <div className="form_header">
-            <div ref={this.loginLink} className="ULCorner">
+            <div ref={this.loginLink} className="ULCorner leftCorner">
               Вход
             </div>
             <div ref={this.registerLink} className="ULCorner">
@@ -189,7 +189,7 @@ class LoginRegisterForm extends Component {
           // сообщение об успешной регистрации, если все правильно
           let message = document.createTextNode("registered successfully".toLowerCase());
           regMessage.appendChild(message);
-          alert('ok');
+          // alert('ok');
           window.location.replace(window.location.protocol + "//" + window.location.host + json["url"]);
         } else {
           // ошибка в переданных данных

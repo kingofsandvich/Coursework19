@@ -30,6 +30,9 @@ class Constructor extends Component {
   constructor(props){
       super(props);
 
+      this.page_id = parseInt(document.getElementById('page_id').innerHTML);
+      // alert(this.page_id);
+
       // window.alert = function () {  };
       // alert('qwerty');
       //
@@ -38,6 +41,7 @@ class Constructor extends Component {
       //
       // window.onbeforeunload=  function () { };
       // window.onbeforeunload();
+      this.pageName = React.createRef();
 
       this.save = this.save.bind(this);
       this.cancel = this.cancel.bind(this);
@@ -59,10 +63,13 @@ class Constructor extends Component {
 
         </div>
         <div className="constrBar">
+          <div  className="pageName">
+             <input type="text" ref={this.pageName}/>
+          </div>
           <div className="toggleSwitch save" onClick={this.save}>
             <p className="noselect" id="constrButton">save</p>
           </div>
-          <div className="toggleSwitch" onClick={this.cancel}>
+          <div className="toggleSwitch cancel" onClick={this.cancel}>
             <p className="noselect" id="constrButton">canel</p>
           </div>
           <Window name="components" switchWidth="140px" height="400px" width="500px">
@@ -95,14 +102,34 @@ class Constructor extends Component {
     // let message = "?data=" + encodeURIComponent(data);
     // let url = window.location.origin + "/style/";
     // window.open(url + message, '_self');
+    css = css.split('}').join('}\t').split('\t').reverse().join('');
+    console.log(css);
+    // console.table(this.editor.DomComponents);
+    // console.table(this.editor.DomComponents.getWrapper());
+    //
+    // console.table(this.editor.StyleManager)
+    // console.log(this.editor.StyleManager.getModelToStyle(this.editor.DomComponents));
+    // console.log(this.editor.StyleManager.getModelToStyle(this.editor.DomComponents.getWrapper()));
+    // console.table(this.editor);
+    // console.table(this.editor.getModel());
+    // console.table(this.editor.StyleManager.getModelToStyle(this.editor));
+    // console.table(this.editor.StyleManager.getModelToStyle(this.editor.getModel()));
+    // console.table(this.editor);
+
+    // console.log(this.editor.StyleManager.getModelToStyle(
+    //   this.getComponents()[0]
+    // ));
+    // console.log(this.editor.StyleManager.getModelToStyle());
 
     // POST
+    let name = this.pageName.current.value;
     let data = new FormData();
     data.append('csrfmiddlewaretoken', this.csrf);
     data.append('html', html);
     data.append('css', css);
+    data.append('name', name);
 
-    fetch("/style/set/", {
+    fetch("/page/" + this.page_id + "/set", {
         method: 'POST',
         body: data,
         credentials: 'same-origin',
@@ -271,19 +298,22 @@ class Constructor extends Component {
       });
 
 
-      // panel__fullscreen
-      this.editor.Commands.add('set-device-desktop', {
-        run: editor => editor.setDevice('Desktop')
-      });
-      this.editor.Commands.add('set-fullscreen', {
-        run: editor => openFullscreen()
-      });
-      this.editor.Commands.add('set-device-tablet', {
-        run: editor => editor.setDevice('Tablet')
-      });
-      this.editor.Commands.add('set-device-mobile', {
-        run: editor => editor.setDevice('Mobile')
-      });
+    // panel__fullscreen
+    this.editor.Commands.add('set-device-desktop', {
+      run: editor => editor.setDevice('Desktop')
+    });
+    this.editor.Commands.add('set-fullscreen', {
+      run: editor => openFullscreen()
+    });
+    this.editor.Commands.add('set-device-tablet', {
+      run: editor => editor.setDevice('Tablet')
+    });
+    this.editor.Commands.add('set-device-mobile', {
+      run: editor => editor.setDevice('Mobile')
+    });
+    this.editor.Commands.add('clear-css', {
+      run: editor => editor.CssComposer.getAll().reset()
+    });
 
     this.editor.Panels.addPanel({
       id: 'basic-actions',
@@ -295,6 +325,12 @@ class Constructor extends Component {
           label: 'HTML & CSS',
           command: 'export-template',
           context: 'export-template',
+        },{
+          id: 'clear',
+          // className: 'btn-open-export',
+          label: 'clear CSS',
+          command: 'clear-css',
+          // context: 'export-template',
         },{
           id: 'full',
           className: 'btn-fullscreen',
@@ -336,8 +372,9 @@ class Constructor extends Component {
       `<span></span>`,
     });
 
+    let pageName = this.pageName.current;
     let editor = this.editor;
-    fetch("/style/get/", {
+    fetch("/page/" + this.page_id + "/get", {
         method: 'POST',
         body: data,
         credentials: 'same-origin',
@@ -351,9 +388,11 @@ class Constructor extends Component {
       }
       css = json['css'];
       html = json['html'];
+      name = json['name'];
 
-      console.log(editor.Canvas);
-      console.log(editor);
+      pageName.value = json['name'];
+      // console.log(editor.Canvas);
+      // console.log(editor);
 
       // console.log(json['css']);
       // console.log(json['html']);
@@ -362,8 +401,13 @@ class Constructor extends Component {
       // Стили внутри редактора
       let react_script = '<script id="init_script" type="text/javascript" src="/static/minimal-react-webpack-babel-setup/dist/bundle.js"></script>';
       // editor.DomComponents.getWrapper().setStyle(css);
+      editor.CssComposer.getAll().reset();
+      // alert(editor.CssComposer.getClassRule());
+      // editor.CssComposer.protectedCss = css;
       editor.setStyle(css);
+
       editor.setComponents(html);
+      console.table(editor.SelectorManager.getAll());
 
       if (!html.includes(react_script)){
       editor.setComponents(react_script);
