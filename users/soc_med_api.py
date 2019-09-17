@@ -8,15 +8,19 @@ from users.vk_auth import get_news_from_to_date, set_status
 from users.vk_auth import repost as repost_vk
 from users.vk_auth import set_like as set_like_vk
 
-#@login_required
+@login_required
 def display(request, utfrom, utto):
-    profile = request.user.profile
-    #print(profile.vkapi)
-    if (profile.vkapi == None):
-        redirect('porcess_vk_auth')
-
-    data = get_news_from_to_date(profile.vktoken, utfrom, utto)
-    print(len(data))
+    apis = request.user.profile.apis.all()
+    data = []
+    # print(len(apis))
+    if len(apis) > 0:
+        api = apis[0]
+        # print(api.token, api.user_id, api.username, api.source, api.in_use)
+    # if (profile.vkapi == None):
+    #     redirect('porcess_vk_auth')
+    #
+        data = get_news_from_to_date(api.token, utfrom, utto)
+        print(len(data))
     data = json.dumps({"vk":data})
 
     return HttpResponse(data, content_type="application/json")

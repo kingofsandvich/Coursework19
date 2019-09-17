@@ -124,6 +124,4 @@ class Window extends Component {
   }
 }
 
-
-
 export default Window;

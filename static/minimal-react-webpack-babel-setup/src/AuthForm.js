@@ -23,27 +23,22 @@ class AuthForm extends Component {
       this.in_use = React.createRef();
       this.code = React.createRef();
 
-      // this.step = 1;
-      // if (props.is_actve)
       this.state = {
         message: props.message,
         id: props.id,
-        source: props.source, // ok
-        username: props.username, // ok
-        is_actve: props.is_actve, // ok
-        in_use: props.in_use, // ok
+        source: props.source,
+        username: props.username,
+        is_actve: props.is_actve,
+        in_use: props.in_use,
         is_filled: props.is_filled,
         title: props.is_filled ? props.title : "New account",
         step: props.step,
         user_id : props.user_id,
       };
-      // alert(this.state.is_actve);
-      // alert(this.state.is_actve ? ('') : ('не'));
   }
 
   componentWillReceiveProps(props) {
     const { refresh, id } = this.props;
-    // if (props.refresh !== refresh) {
       this.state = {
         message: props.message,
         id: props.id,
@@ -56,11 +51,9 @@ class AuthForm extends Component {
         step: props.step,
         user_id : props.user_id,
       };
-    // }
   }
 
   deleteSource(){
-    // alert(this.state.id);
     this.delete(this.state.id)
   }
 
@@ -69,11 +62,6 @@ class AuthForm extends Component {
     this.setState(this.state);
 
     let update_source = this.update_source;
-    // this.update_auth(this.state.id,
-    //                  this.username.current.value,
-    //                  this.password.current.value,
-    //                  this.state.in_use,
-    //                  this.source.current.options[this.source.current.selectedIndex].value);
 
     let id = this.state.id;
     let username = this.username.current.value;
@@ -106,16 +94,12 @@ class AuthForm extends Component {
 
     }).then(function(myJson) {
       let json = JSON.parse(JSON.stringify(myJson));
-      // console.table(json);
       if (json['error']){
-        // console.log('not ok');
 
         curState['message'] = json['error'];
         state.setState(curState);
 
       } else {
-        // console.log('ok');
-
         // аутентификация прошла успешно
         if (json['step'] == 1) {
           state.update_source(id,
@@ -188,10 +172,6 @@ class AuthForm extends Component {
         </div>
       </div>
     );
-     // {(this.state.source == 'vk') ? selected="selected" : ''}
-
-
-    // {this.state.in_use ? 'checked' : 'checked'}
   }
   componentDidMount(){
 

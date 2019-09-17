@@ -63,26 +63,6 @@ def userUpdate(request):
         else:                             # неавторизованный AJAX
             response_data['error'] = 'user not authenticated'
             return HttpResponse(json.dumps(response_data), content_type="application/json")
-
-
-        # if password != repeat_password:
-        #     response_data['error'] = 'passwords should match'
-        #     return HttpResponse(json.dumps(response_data), content_type="application/json")
-        # if mail and User.objects.filter(email=mail).exclude(username=username).exists():
-        #     response_data['error'] = ' mail is already in use; '
-        #     return HttpResponse(json.dumps(response_data), content_type="application/json")
-        # # регистрация
-        # user, created = User.objects.get_or_create(username=username, email=mail)
-        # if created:
-        #     user.set_password(password)
-        #     user.save()
-        #     login(request, user)
-        #     response_data['url'] = '/index'
-        #     return HttpResponse(json.dumps(response_data), content_type="application/json")
-        # else:
-        #     response_data['error'] = 'could not create such a user'
-        #     return HttpResponse(json.dumps(response_data), content_type="application/json")
-
     else:
         # авторизованный пользователь
         if request.user.is_authenticated:
@@ -117,8 +97,8 @@ def loginAJAX(request):
             return redirect('index')
         # неавторизованный пользователь
         return redirect('enter_site')
-# ______________________________________ #
-def registerAJAX(request):
+
+def register(request):
     if request.method == 'POST':
         response_data = {}
         # авторизованный AJAX
@@ -154,68 +134,22 @@ def registerAJAX(request):
             response_data['error'] = 'could not create such a user'
 
         return HttpResponse(json.dumps(response_data), content_type="application/json")
-        # user = authenticate(username = username, password = password)
-        # if user is not None:
-        #     # аутентификация успешна
-        #     login(request, user)
-        #     response_data['url'] = '/index'
-        #     return HttpResponse(json.dumps(response_data), content_type="application/json")
-        # else:
-        #     # аутентификация не успешна
-        #     response_data['error'] = 'user does not exsist or password is incorrect'
-        #     return HttpResponse(json.dumps(response_data), content_type="application/json")
     else:
         # авторизованный пользователь
         if request.user.is_authenticated:
             return redirect('index')
         # неавторизованный пользователь
         return redirect('enter_site')
-# ______________________________________ #
-# class UserForm(forms.Form):
-#     username = forms.CharField(max_length=120)
-#     password = forms.CharField(max_length=120)
-#
-# class UserFormView(FormView):
-#     form_class = UserForm
-#     # template_name = 'users/ajax.html'
-#     success_url = '/index/'
-#
-#     def form_valid(self, form):
-#         response = super(UserFormView, self).form_invalid(form)
-#         if self.request.is_ajax():
-#             print(form.cleaned_data)
-#             data = {
-#                 'message' : "Successfully submited form data."
-#             }
-#             print(response)
-#             return JsonResponse(form.errors, status=400)
-#         else:
-#             return response
-#
-#     def form_valid(self, form):
-#         response = super(UserFormView, self).form_invalid(form)
-#         if self.request.is_ajax():
-#             print(form.cleaned_data)
-#             data = {
-#                 'message' : "Successfully submited form data."
-#             }
-#             return JsonResponse(data)
-#         else:
-#             return response
-#______________________________________#
+
 # ______авторизация и API _______________________________
 def if_source_token_active(token, source):
     try:
         if source == 'vk':
-            # print('x'*50)
-            # print(get_source_id(token, source) != -1)
-            # print('x'*50)
             return get_source_id(token, source) != -1
         else:
             return False
         return True
     except:
-        # print('x'*100)
         return False
 
 def get_source_id(token, source='vk'):
@@ -270,26 +204,13 @@ def can_change_source_user(user, api_username, token, source='vk', in_use=True):
         message = source + " user authenticated in other account"
 
     return answ, message
-#
-# class VKForm(forms.Form):
-#     login = forms.CharField(required=True, label='Логин')
-#     password = forms.CharField(widget=forms.PasswordInput(), required=True, label='Пароль')
-# class VKForm_two_factor(forms.Form):
-#     code = forms.CharField(required=True, label='Код подтверждения')
-
-# def set_token(user, token, source):
-#     id = get_source_id(token, source)
-#
-#     user.profile.vktoken = token
-
 
 # не вызывается напрямую
 # предпологаем, что пользователь авторизован, а метод запроса POST
 @login_required
 def vk_auth_step_one(request):
     response_data = {}
-    # if request.method == 'POST':
-    #     if request.user.is_authenticated: # авторизованный AJAX
+
     username = request.POST['username']
     password = request.POST['password']
     source = request.POST['source']
@@ -309,25 +230,13 @@ def vk_auth_step_one(request):
     response_data['username'] = username
     response_data['source'] = source
     response_data['in_use'] = in_use
-    # response_data['']
-    # response_data['']
-
-    print(response_value)
 
     if response_value == -1:
-        # print('Authorization error')
         response_data['error'] = 'authorization error, invalid username or password'
     elif response_value == 0:
         token = vkAuth.get_token()
         can_use, message = can_change_source_user(request.user, username, token, 'vk', in_use)
         if can_use:
-            # username ok
-            # password -
-            # source ok
-            # step ok
-            # in_use ok
-            # token
-            #if_source_token_active(token, 'vk')
             is_actve = True # так как выданный токен назначается новым и старым объектам
             response_data['is_actve'] = is_actve
             response_data['step'] = 1
@@ -351,10 +260,7 @@ def vk_auth_step_one(request):
         request.user.profile.save()
         request.user.save()
         response_data['step'] = 2
-    #     else:
-    #         response_data['error'] = 'user not authenticated'
-    # else:
-    #     response_data['error'] = 'wrong request method'
+
     print(response_data)
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
@@ -362,12 +268,9 @@ def vk_auth_step_one(request):
 # по аналогии с vk_auth_step_one
 def vk_auth_step_two(request):
     response_data = {}
-    # if request.method == 'POST':
-    #     if request.user.is_authenticated: # авторизованный AJAX
-
     vkAuth = request.user.profile.temp_api_object
     vkAuth.session = request.user.profile.vkapi
-    print(request.POST)
+
     code = request.POST['code']
     username = request.POST['username']
     password = request.POST['password']
@@ -375,27 +278,9 @@ def vk_auth_step_two(request):
     step = int(request.POST['step'])
     in_use = request.POST['in_use'] == 'true'
 
-
     response_data['username'] = username
     response_data['source'] = source
     response_data['in_use'] = in_use
-
-    # print(vkAuth)
-    print()
-    print(vkAuth.__dict__)
-    print()
-    # print(vkAuth.session.__dict__)
-    # print()
-    # vkAuth.continue_auth(code)
-
-    # vkAuth.continue_auth(code)
-    # print('goddamn token',vkAuth.get_token())
-    # token = '0668566c8d09f47d1b1599abd5b6ee49be1260aac4a5e43a1723f61d96fa7f9ec86f9d8f9dd49cfc2e7e3'
-    # token = vkAuth.get_token()
-
-    # print('can_use',can_use)
-    # print('message',message)
-    # print('token',token)
 
     try:
         vkAuth.continue_auth(code)
@@ -406,8 +291,6 @@ def vk_auth_step_two(request):
                                                   'vk',
                                                   in_use)
         if can_use:
-            # response_data['status'] = message
-            # response_data['active'] = if_source_token_active(token, 'vk')
             is_actve = True # так как выданный токен назначается новым и старым объектам
             response_data['is_actve'] = is_actve
             response_data['step'] = 1
@@ -416,10 +299,6 @@ def vk_auth_step_two(request):
     except:
         response_data['error'] = 'authorization error, invalid code'
 
-    #     else:
-    #         response_data['error'] = 'user not authenticated'
-    # else:
-    #     response_data['error'] = 'wrong request method'
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @login_required
@@ -444,9 +323,7 @@ def setSource(request):
     if request.method == 'POST':
         source = request.POST['source']
         step = int(request.POST['step'])
-        # print(step == 1)
-        # print(type(step))
-        # print(step)
+
         if source == 'vk':
             if step == 1:
                 return vk_auth_step_one(request)
@@ -485,115 +362,13 @@ def userInfo(request):
     else:
         response_data['error'] = 'user not authenticated'
     return HttpResponse(json.dumps(response_data), content_type="application/json")
-# ______________________________________
-
-@login_required
-def porcess_vk_auth2(request):
-    vk_second = request.session.get('vk_second')
-    if (vk_second == None):
-        redirect('porcess_vk_auth')
-    if (not vk_second):
-        form = VKForm_two_factor(request.POST)
-        if (form.is_valid()):
-            code = form.cleaned_data.get('code')
-            print(code)
-            vkAuth = request.user.profile.vkapi
-            vkAuth.form_parser = request.user.profile.formParser
-            print(vkAuth)
-            print(vkAuth.form_parser)
-            print(vkAuth.form_parser.url)
-            messages.success(request, f'Введите код подтверждения.')
-            return redirect('index')
-    else:
-        form = VKForm_two_factor()
-        request.session['vk_second'] = False
-    return render(request, 'users/auth.html', {'form':form})
-
-# Обработка формы авторизации vk
-# заполняет пользователю поле с данными для доступа к API vk
-# в случае невалидности данных выдает сообщение
-@login_required
-def porcess_vk_auth(request):
-
-    if (request.method == 'POST'):
-        form = VKForm(request.POST)
-        if (form.is_valid()):
-            login = form.cleaned_data.get('login')
-            password = form.cleaned_data.get('password')
-
-            scope = ['friends', 'wall', 'offline', 'groups', 'status']
-            app_id = 6836128
-            vkAuth = VKAuth(scope, app_id, '5.92')
-            #ставим логин и пароль из первой формы
-            vkAuth.set_login_password(login, password)
-            #первый шаг: если ошибка возвращает -1, если все норм то 0. После этого
-            #можно пользоваться этим объектом чтобы забрать токен доступа
-            res = vkAuth.auth_step1()
-            #переменная отвечающая за код двухфакторки (берем из второй формы)
-            code = '165404'
-            #если результат первой итерации 1 то вызываем функцию которая логинит нас через код для двухфакторки
-            #res = 1
-            if res == -1 :
-                messages.success(request, f'Ошибка авторизации. Проверьте введенные данные.')
-                return redirect('porcess_vk_auth')
-            elif res == 0 :
-                messages.success(request, f'Аккаунт ВК {login} добавлен.')
-                request.user.profile.vkapi = vkAuth
-                request.user.profile.formParser = vkAuth.form_parser
-                request.user.profile.vktoken = vkAuth.get_token()
-                print(vkAuth.get_token())
-                request.user.profile.save()
-                return redirect('index')
-            else:
-                return redirect('porcess_vk_auth')
-                '''
-                #redirect('porcess_vk_auth2', vkAuth=(vkAuth), first_call=True)
-                request.user.profile.vkapi = vkAuth
-                request.user.profile.formParser = vkAuth.form_parser
-                request.session['vk_second'] = True
-                request.user.profile.save()#update_fields=["vkapi"])
-                #vkAuth.continue_auth(code)
-                messages.success(request, f'Введите код подтверждения.')
-                return redirect('porcess_vk_auth2')
-                '''
-    else:
-        form = VKForm()
-    return render(request, 'users/auth.html', {'form':form})
-
-@login_required
-def set_page(request):
-    response_data = {}
-    if request.method == 'POST':
-        if request.user.is_authenticated: # авторизованный AJAX
-            request.user.profile.css = request.POST['css']
-            request.user.profile.html = request.POST['html']
-            request.user.profile.save()
-            response_data['status'] = 'page changed'
-        else:
-            response_data['error'] = 'user not authenticated'
-    else:
-        response_data['error'] = 'wrong request method'
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
-
-@login_required
-def get_page(request):
-    response_data = {}
-    if request.method == 'POST':
-        if request.user.is_authenticated: # авторизованный AJAX
-            response_data['css'] = request.user.profile.css
-            response_data['html'] = request.user.profile.html
-        else:
-            response_data['error'] = 'user not authenticated'
-    else:
-        response_data['error'] = 'wrong request method'
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 def log_out(request):
     logout(request)
     return redirect('enter_site')
 
 @login_required
-def set_page2(request, page_id):
+def set_page(request, page_id):
     response_data = {}
     if request.method == 'POST':
         if request.user.is_authenticated: # авторизованный AJAX
@@ -610,11 +385,10 @@ def set_page2(request, page_id):
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @login_required
-def get_page2(request, page_id):
+def get_page(request, page_id):
     response_data = {}
     if request.method == 'POST':
         if request.user.is_authenticated: # авторизованный AJAX
-            # request.user.profile
             page = Page.objects.get(id=page_id)
             response_data['css'] = page.css
             response_data['html'] = page.html
@@ -625,38 +399,3 @@ def get_page2(request, page_id):
     else:
         response_data['error'] = 'wrong request method'
     return HttpResponse(json.dumps(response_data), content_type="application/json")
-
-
-# Create your views here.
-def register(request):
-    if (request.method == 'POST'):
-        form = UserRegistrationForm(request.POST)
-        if (form.is_valid()):
-            username = form.cleaned_data.get('username')
-            form.save()
-            messages.success(request, f'Аккаунт создан {username}, можете войти!')
-            return redirect('login')
-    else:
-        form = UserRegistrationForm()
-    return render(request, 'users/register.html', {'form':form})
-
-@login_required
-def edit(request):
-    if (request.method == 'POST'):
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, instance=request.user.profile)
-
-        if (u_form.is_valid() and p_form.is_valid()):
-            u_form.save()
-            p_form.save()
-            messages.success(request, 'Ваш аккаунт изменен')
-            return redirect('edit')
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
-
-    context = {
-        'u_form' : u_form,
-        'p_form' : p_form,
-    }
-    return render(request, 'users/edit.html' ,context)

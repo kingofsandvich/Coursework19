@@ -20,47 +20,9 @@
 		<svg id="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 640 640" width="40" height="40"><defs><path d="M356.34 176.15L401.72 266.91L310.96 266.91L220.2 266.91L265.57 176.15L310.96 85.38L356.34 176.15Z" id="d5iilslPX"></path><path d="M265.76 357.67L311.14 448.43L220.37 448.43L129.62 448.43L174.99 357.67L220.37 266.91L265.76 357.67Z" id="caPEmc2AB"></path><path d="M447.1 357.67L492.48 448.43L401.72 448.43L310.96 448.43L356.34 357.67L401.72 266.91L447.1 357.67Z" id="b3E3SboPOh"></path><path d="M175 539.19L220.38 629.95L129.61 629.95L38.85 629.95L84.23 539.19L129.61 448.43L175 539.19Z" id="e2TytHoc8d"></path><path d="M356.34 539.19L401.72 629.95L310.96 629.95L220.2 629.95L265.57 539.19L310.96 448.43L356.34 539.19Z" id="a1mD3HobTC"></path><path d="M537.86 539.19L583.24 629.95L492.48 629.95L401.72 629.95L447.1 539.19L492.48 448.43L537.86 539.19Z" id="aWCSCqfD"></path></defs><g><g><g><use xlink:href="#d5iilslPX" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#d5iilslPX" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#caPEmc2AB" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#caPEmc2AB" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#b3E3SboPOh" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#b3E3SboPOh" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#e2TytHoc8d" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#e2TytHoc8d" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#a1mD3HobTC" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#a1mD3HobTC" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#aWCSCqfD" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#aWCSCqfD" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use></g></g></g></g></svg>
 
 	  {% if user.is_authenticated %}
-		<!-- <div class="nav_link">
-			<a href="{% url 'index'%}">main</a>
-			<a href="{% url 'edit_page'%}" class="edit_name">
-				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
-					<path fill="#fff" d="M12 7v-2l-1.2-0.4c-0.1-0.3-0.2-0.7-0.4-1l0.6-1.2-1.5-1.3-1.1 0.5c-0.3-0.2-0.6-0.3-1-0.4l-0.4-1.2h-2l-0.4 1.2c-0.3 0.1-0.7 0.2-1 0.4l-1.1-0.5-1.4 1.4 0.6 1.2c-0.2 0.3-0.3 0.6-0.4 1l-1.3 0.3v2l1.2 0.4c0.1 0.3 0.2 0.7 0.4 1l-0.5 1.1 1.4 1.4 1.2-0.6c0.3 0.2 0.6 0.3 1 0.4l0.3 1.3h2l0.4-1.2c0.3-0.1 0.7-0.2 1-0.4l1.2 0.6 1.4-1.4-0.6-1.2c0.2-0.3 0.3-0.6 0.4-1l1.2-0.4zM3 6c0-1.7 1.3-3 3-3s3 1.3 3 3c0 1.7-1.3 3-3 3s-3-1.3-3-3z"></path>
-					<path fill="#fff" d="M7.5 6c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path>
-					<path fill="#fff" d="M16 3v-1h-0.6c0-0.2-0.1-0.4-0.2-0.5l0.4-0.4-0.7-0.7-0.4 0.4c-0.2-0.1-0.3-0.2-0.5-0.2v-0.6h-1v0.6c-0.2 0-0.4 0.1-0.5 0.2l-0.4-0.4-0.7 0.7 0.4 0.4c-0.1 0.2-0.2 0.3-0.2 0.5h-0.6v1h0.6c0 0.2 0.1 0.4 0.2 0.5l-0.4 0.4 0.7 0.7 0.4-0.4c0.2 0.1 0.3 0.2 0.5 0.2v0.6h1v-0.6c0.2 0 0.4-0.1 0.5-0.2l0.4 0.4 0.7-0.7-0.4-0.4c0.1-0.2 0.2-0.3 0.2-0.5h0.6zM13.5 3.5c-0.6 0-1-0.4-1-1s0.4-1 1-1 1 0.4 1 1c0 0.6-0.4 1-1 1z"></path>
-					<path fill="#fff" d="M15.4 11.8c-0.1-0.3-0.2-0.6-0.4-0.9l0.3-0.6-0.7-0.7-0.5 0.4c-0.3-0.2-0.6-0.3-0.9-0.4l-0.2-0.6h-1l-0.2 0.6c-0.3 0.1-0.6 0.2-0.9 0.4l-0.6-0.3-0.7 0.7 0.3 0.6c-0.2 0.3-0.3 0.6-0.4 0.9l-0.5 0.1v1l0.6 0.2c0.1 0.3 0.2 0.6 0.4 0.9l-0.3 0.6 0.7 0.7 0.6-0.3c0.3 0.2 0.6 0.3 0.9 0.4l0.1 0.5h1l0.2-0.6c0.3-0.1 0.6-0.2 0.9-0.4l0.6 0.3 0.7-0.7-0.4-0.5c0.2-0.3 0.3-0.6 0.4-0.9l0.6-0.2v-1l-0.6-0.2zM12.5 14c-0.8 0-1.5-0.7-1.5-1.5s0.7-1.5 1.5-1.5 1.5 0.7 1.5 1.5-0.7 1.5-1.5 1.5z"></path>
-				</svg>
-			</a>
-		</div> -->
-		<!-- <div class="nav_link">
-			<a href="{% url 'logout'%}">
-				<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 1024 1024" style="height: 26px;margin-top: 7px; fill: white;" xml:space="preserve">
-				<g>
-					<path d="M932.254,490.726L772.835,331.315c-11.754-11.755-30.775-11.771-42.53-0.094c-11.786,11.684-11.896,30.748-0.267,42.582
-						L836.411,482H408.187c-16.636,0-30.132,13.357-30.132,30s13.497,30,30.132,30H838.2L730.21,650.055
-						c-11.755,11.763-11.755,30.887,0,42.649c5.885,5.885,13.606,8.848,21.312,8.848c7.706,0,15.427-2.933,21.312-8.818l159.419-159.406
-						c5.649-5.65,8.82-13.314,8.82-21.302C941.073,504.039,937.903,496.375,932.254,490.726z"/>
-					<path d="M698.927,787.552c-16.636,0-30,13.489-30,30.132V964h-526V60h526v146.376c0,16.643,13.364,30.132,30,30.132
-						c16.635,0,30-13.489,30-30.132V29.914C728.927,13.27,715.238,0,698.603,0H113.032C96.397,0,82.927,13.27,82.927,29.914v964.233
-						c0,16.643,13.47,29.854,30.106,29.854h585.571c16.635,0,30.324-13.21,30.324-29.854V817.684
-						C728.927,801.041,715.562,787.552,698.927,787.552z"/>
-				</g>
-				</svg>
-			</a>
-		</div> -->
-		<!-- <div class="nav_link">
-			<a href="{% url 'edit_page'%}">edit page</a>
-		</div>
-		<div class="nav_link">
-			<a href="{% url 'porcess_vk_auth'%}">login vk</a>
-		</div> -->
 		{% for page in user.profile.pages.all %}
 			<div class="nav_link">
-				<!-- {{page.id}} -->
 				<a href="{% url 'page_get' page_id=page.id%}">{{page.name}}</a>
-				<!-- {{page.html}} -->
-				<!-- <a href="{% url 'edit_page'%}" class="edit_name"> -->
-
 				<a href="{% url 'page_edit' page_id=page.id%}" class="edit_name">
 					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
 						<path fill="#fff" d="M12 7v-2l-1.2-0.4c-0.1-0.3-0.2-0.7-0.4-1l0.6-1.2-1.5-1.3-1.1 0.5c-0.3-0.2-0.6-0.3-1-0.4l-0.4-1.2h-2l-0.4 1.2c-0.3 0.1-0.7 0.2-1 0.4l-1.1-0.5-1.4 1.4 0.6 1.2c-0.2 0.3-0.3 0.6-0.4 1l-1.3 0.3v2l1.2 0.4c0.1 0.3 0.2 0.7 0.4 1l-0.5 1.1 1.4 1.4 1.2-0.6c0.3 0.2 0.6 0.3 1 0.4l0.3 1.3h2l0.4-1.2c0.3-0.1 0.7-0.2 1-0.4l1.2 0.6 1.4-1.4-0.6-1.2c0.2-0.3 0.3-0.6 0.4-1l1.2-0.4zM3 6c0-1.7 1.3-3 3-3s3 1.3 3 3c0 1.7-1.3 3-3 3s-3-1.3-3-3z"></path>
@@ -72,18 +34,6 @@
 			</div>
 		{% endfor %}
 		<div class="nav_link_right"></div>
-
-		<!-- {% for page in pages %}
-			<div class="nav_link">
-				<a href="{% url 'index'%}">main</a>
-			</div>
-		{% endfor %} -->
-
-
-
-
-
-
 		<div id="icon-left">
 			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 640 640" width="40" height="40"><defs><path d="M561.3 306.59C561.3 442.97 450.58 553.7 314.2 553.7C177.82 553.7 67.1 442.97 67.1 306.59C67.1 170.22 177.82 59.49 314.2 59.49C450.58 59.49 561.3 170.22 561.3 306.59Z" id="bxELRNCJm"></path><path d="M395.4 260.27C395.4 305.08 359.02 341.47 314.2 341.47C269.39 341.47 233.01 305.08 233.01 260.27C233.01 215.46 269.39 179.08 314.2 179.08C359.02 179.08 395.4 215.46 395.4 260.27Z" id="o7ksmz4KVF"></path><path d="M178.88 381.31L453.52 381.31L453.52 477.97L178.88 477.97L178.88 381.31Z" id="a5qQs6dmWP"></path><path d="M453.52 381.31C453.52 392.52 391.99 401.62 316.2 401.62C240.41 401.62 178.88 392.52 178.88 381.31C178.88 370.1 240.41 360.99 316.2 360.99C391.99 360.99 453.52 370.1 453.52 381.31Z" id="c3EGU7NHro"></path><path d="M453.52 478.63C453.52 501.45 391.99 519.97 316.2 519.97C240.41 519.97 178.88 501.45 178.88 478.63C178.88 455.82 240.41 437.29 316.2 437.29C391.99 437.29 453.52 455.82 453.52 478.63Z" id="fgKX2DHYr"></path></defs><g><g><g><use xlink:href="#bxELRNCJm" opacity="1" fill="#ffffff" fill-opacity="0"></use><g><use xlink:href="#bxELRNCJm" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="15" stroke-opacity="1"></use></g></g><g><use xlink:href="#o7ksmz4KVF" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#o7ksmz4KVF" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#a5qQs6dmWP" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#a5qQs6dmWP" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#c3EGU7NHro" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#c3EGU7NHro" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="1" stroke-opacity="1"></use></g></g><g><use xlink:href="#fgKX2DHYr" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#fgKX2DHYr" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="1" stroke-opacity="1"></use></g></g></g></g></svg>
 		</div>
@@ -103,16 +53,7 @@
 			</svg>
 		</a>
 	  {% else %}
-		<!-- <div class="nav_link">
-			<a href="{% url 'login'%}">login</a>
-		</div>
-		<div class="nav_link ">
-			<a href="{% url 'register'%}">register</a>
-		</div>
-		<div class="nav_link_right"></div> -->
-
 	  {% endif %}
-
 	</nav>
 </div>
 

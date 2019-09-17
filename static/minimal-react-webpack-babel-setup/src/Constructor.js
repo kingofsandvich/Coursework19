@@ -31,30 +31,11 @@ class Constructor extends Component {
       super(props);
 
       this.page_id = parseInt(document.getElementById('page_id').innerHTML);
-      // alert(this.page_id);
-
-      // window.alert = function () {  };
-      // alert('qwerty');
-      //
-      // window.confirm = function () {  };
-      // window.confirm();
-      //
-      // window.onbeforeunload=  function () { };
-      // window.onbeforeunload();
       this.pageName = React.createRef();
 
       this.save = this.save.bind(this);
       this.cancel = this.cancel.bind(this);
       this.csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value;
-      // window.confirm = function() { return false; };
-      // window.onbeforeunload = function() { return false; };
-      //
-      // window.addEventListener('beforeunload', function (e) {
-      //   // Cancel the event
-      //   e.preventDefault();
-      //   // Chrome requires returnValue to be set
-      //   // e.returnValue = '';
-      // });
   }
   render() {
     return (
@@ -90,36 +71,13 @@ class Constructor extends Component {
     );
   }
   cancel(){
-    // window.confirm = function() { return false; };
-    // window.onbeforeunload = function() { return false; };
-    // window.open(window.location.origin + "/index/",'_self');
     window.location.replace(window.location.protocol + "//" + window.location.host + '/index');
   }
   save(){
     let html = this.editor.getHtml();
     let css = this.editor.getCss();
-    // let data =  JSON.stringify({ 'html' : html, 'css': css })
-    // let message = "?data=" + encodeURIComponent(data);
-    // let url = window.location.origin + "/style/";
-    // window.open(url + message, '_self');
-    css = css.split('}').join('}\t').split('\t').reverse().join('');
-    console.log(css);
-    // console.table(this.editor.DomComponents);
-    // console.table(this.editor.DomComponents.getWrapper());
-    //
-    // console.table(this.editor.StyleManager)
-    // console.log(this.editor.StyleManager.getModelToStyle(this.editor.DomComponents));
-    // console.log(this.editor.StyleManager.getModelToStyle(this.editor.DomComponents.getWrapper()));
-    // console.table(this.editor);
-    // console.table(this.editor.getModel());
-    // console.table(this.editor.StyleManager.getModelToStyle(this.editor));
-    // console.table(this.editor.StyleManager.getModelToStyle(this.editor.getModel()));
-    // console.table(this.editor);
 
-    // console.log(this.editor.StyleManager.getModelToStyle(
-    //   this.getComponents()[0]
-    // ));
-    // console.log(this.editor.StyleManager.getModelToStyle());
+    css = css.split('}').join('}\t').split('\t').reverse().join('');
 
     // POST
     let name = this.pageName.current.value;
@@ -144,29 +102,6 @@ class Constructor extends Component {
     let html = '';
     let data = new FormData();
     data.append('csrfmiddlewaretoken', this.csrf);
-
-
-    // let request = async () => {
-    //     let response = await fetch("/style/get/", {
-    //         method: 'POST',
-    //         body: data,
-    //         credentials: 'same-origin',
-    //     });
-    //     let json = await response.json();
-    //     json = JSON.parse(JSON.stringify(json));
-    //     css = json['css'];
-    //     html = json['html'];
-    //     console.log(json['css']);
-    //     console.log(json['html']);
-    //     console.log(json);
-    //     console.table(json);
-    //     console.log(json);
-    // }
-    //
-    // request();
-
-
-    // request();
 
     this.editor = grapesjs.init({
           plugins : [exportGrapes],
@@ -391,19 +326,11 @@ class Constructor extends Component {
       name = json['name'];
 
       pageName.value = json['name'];
-      // console.log(editor.Canvas);
-      // console.log(editor);
 
-      // console.log(json['css']);
-      // console.log(json['html']);
-      // console.log(json);
-      // console.table(json);
-      // Стили внутри редактора
       let react_script = '<script id="init_script" type="text/javascript" src="/static/minimal-react-webpack-babel-setup/dist/bundle.js"></script>';
-      // editor.DomComponents.getWrapper().setStyle(css);
+
       editor.CssComposer.getAll().reset();
-      // alert(editor.CssComposer.getClassRule());
-      // editor.CssComposer.protectedCss = css;
+
       editor.setStyle(css);
 
       editor.setComponents(html);
@@ -418,8 +345,6 @@ class Constructor extends Component {
 
 
     this.editor.on('block:drag:stop', model => {
-      // alert(document.getElementsByClassName('gjs-frame')[0].contentWindow.document.getElementById('feed'));
-      // console.log(document.getElementsByClassName('gjs-frame')[0].contentWindow.document.getElementById('feed'));
       try {
         ReactDOM.render(
           <Feed/>,

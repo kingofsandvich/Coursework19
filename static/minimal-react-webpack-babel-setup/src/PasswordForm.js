@@ -17,17 +17,9 @@ class PasswordForm extends Component {
       this.updating    = this.updating.bind(this);
       this.addingSource    = this.addingSource.bind(this);
 
-      // this.update_auth
-      // this.create_auth
-      // this.delete
-
-      // console.table(this.state)
-
       this.state = {
         accounts: []
       };
-      // console.table(this.state)
-
 
       this.csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value;
   }
@@ -46,60 +38,6 @@ class PasswordForm extends Component {
       step: 1,
     };
     state.setState(this.state[id]);
-    // let data = new FormData();
-    // let state = this;
-    // const { accounts } = this.state;
-    //
-    // data.append('csrfmiddlewaretoken', this.csrf);
-    // data.append('username', username);
-    // data.append('password', password);
-    // data.append('in_use', in_use);
-    // data.append('source', source);
-    //
-    // fetch("/setSource/", {
-    //     method: 'POST',
-    //     body: data,
-    //     credentials: 'same-origin',
-    // }).then(function(response) {
-    //   if (response.ok) {
-    //     return response.json();           // корректный ответ
-    //   } else {
-    //     throw Error(response.statusText); // ошибка на сервере
-    //   }
-    // }).then(function(myJson) {
-    //   let json = JSON.parse(JSON.stringify(myJson));
-    //
-    //   if (json['error']){
-    //     console.log('not ok');
-    //
-    //     accounts[id]['message'] = json['error'];
-    //     state.setState({
-    //       accounts: accounts
-    //     });
-    //
-    //   } else {
-    //     console.log('ok');
-    //
-    //     accounts[id] = {
-    //       message: '',
-    //       id: id,
-    //       source: json['source'], // ok
-    //       username: json['username'], // ok
-    //       is_actve: json['is_actve'], // ok
-    //       in_use: json['in_use'], // ok
-    //       is_filled: true,
-    //       title: json['source'] + ': ' + json['username'],
-    //     };
-    //     state.setState({
-    //       accounts: accounts
-    //     });
-    //   }
-    // }).catch(function(error) {
-    //   accounts[id]['message'] = 'error: can not process request';
-    //   state.setState({
-    //     accounts: accounts
-    //   });
-    // });
   }
 
   create_auth(id){
@@ -107,7 +45,6 @@ class PasswordForm extends Component {
   }
 
   delete(id){
-    // alert(id);
     let user_id = this.state.accounts[id]['user_id']
     let source = this.state.accounts[id]['source']
 
@@ -118,15 +55,7 @@ class PasswordForm extends Component {
 
     let cur = this;
 
-
-    // if (accounts.length > 0) {
-    //   accounts = accounts.map((account, i) => account.id = i);
-    // } else {
-    //   accounts = [undefined, undefined,undefined]
-    // }
-    // console.table(accounts);
-
-    console.table(this.state.accounts);
+    // console.table(this.state.accounts);
 
     fetch("/deleteSource/", {
         method: 'POST',
@@ -156,19 +85,9 @@ class PasswordForm extends Component {
       cur.setState({
         accounts : accounts,
       });
-      // console.log(json['accounts']);
-      // state.setState({
-      //   accounts: json['accounts']
-      // });
-      // alert(state.state.accounts[0]['is_filled']);
-      // userForm.elements['username'].value = json['username'];
-      // userForm.elements['mail'].value = json['mail'];
     }).catch(function(error) {
       // message.appendChild(document.createTextNode('error: can not get user\'s data'));
     });
-
-    // accounts = accounts.map()
-
   }
 
   render() {
@@ -179,7 +98,7 @@ class PasswordForm extends Component {
               Profile
             </div>
           </div>
-          <div className="form_content scrollable_content">
+          <div className="form_content scroller scrollable_content">
             <div id="login" className="tablink active">
               <form ref={this.userForm}>
                 <input autoComplete="new-password" type="text" name="mail" title="mail" placeholder="mail"></input>
@@ -239,11 +158,9 @@ class PasswordForm extends Component {
     }).then(function(myJson) {
       let json = JSON.parse(JSON.stringify(myJson));
 
-      // console.log(json['accounts']);
       state.setState({
         accounts: json['accounts']
       });
-      // alert(state.state.accounts[0]['is_filled']);
       userForm.elements['username'].value = json['username'];
       userForm.elements['mail'].value = json['mail'];
     }).catch(function(error) {
@@ -316,7 +233,7 @@ class PasswordForm extends Component {
         break;
       }
     }
-
+    alert(canAdd);
     if (canAdd) {
       this.setState(state => {
         const accounts = state.accounts.concat({

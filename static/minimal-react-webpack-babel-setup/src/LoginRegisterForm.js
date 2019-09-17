@@ -1,22 +1,6 @@
 import React, { Component } from 'react';
 import './Forms.css';
 
-// function openTab(evt, tabName) {
-//   alert("!");
-//   var i, ulcorner, tablink;
-//   ulcorner = document.getElementsByClassName("ULCorner");
-//   for (i = 0; i < ulcorner.length; i++) {
-//     ulcorner[i].style.display = "none";
-//   }
-//   tablink = document.getElementsByClassName("tablink");
-//   for (i = 0; i < tablink.length; i++) {
-//     tablink[i].className = tablink[i].className.replace(" active", "");
-//   }
-//   document.getElementById(tabName).style.display = "block";
-//   evt.currentTarget.className += " active";
-// }
-
-
 // расширяемый контейнер контейнер
 class LoginRegisterForm extends Component {
   constructor(props){
@@ -121,7 +105,7 @@ class LoginRegisterForm extends Component {
       data.append('csrfmiddlewaretoken', this.csrf);
 
       // обрабатываем POST запрос с формой
-      fetch("/loginAJAX/", {
+      fetch("/login/", {
           method: 'POST',
           body: data,
           credentials: 'same-origin',
@@ -171,7 +155,7 @@ class LoginRegisterForm extends Component {
       data.append('csrfmiddlewaretoken', this.csrf);
 
       // обрабатываем POST запрос с формой
-      fetch("/registerAJAX/", {
+      fetch("/register/", {
           method: 'POST',
           body: data,
           credentials: 'same-origin',
@@ -189,7 +173,6 @@ class LoginRegisterForm extends Component {
           // сообщение об успешной регистрации, если все правильно
           let message = document.createTextNode("registered successfully".toLowerCase());
           regMessage.appendChild(message);
-          // alert('ok');
           window.location.replace(window.location.protocol + "//" + window.location.host + json["url"]);
         } else {
           // ошибка в переданных данных

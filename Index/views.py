@@ -11,10 +11,6 @@ def home(request):
 	css = ""
 
 	if request.user.is_authenticated:
-		# requestContext = RequestContext(request)
-		# requestContext.push({'pages':[1, 2, 3]})
-		# pages = request.user.profile.pages.all()
-		# print(pages)
 		page = request.user.profile.pages.all()[0]
 		html = page.html
 		css = page.css
@@ -26,12 +22,7 @@ def page(request, page_id):
 	css = ""
 
 	if request.user.is_authenticated:
-		# requestContext = RequestContext(request)
-		# requestContext.push({'pages':[1, 2, 3]})
-		# pages = request.user.profile.pages.all()
-		# print(pages)
 		pages = request.user.profile.pages.all()
-		# print(pages)
 		for page in pages:
 			if page.id == page_id:
 				html = page.html
@@ -45,8 +36,5 @@ def red_home(request):
 	else:
 		return redirect('enter_site')
 
-def edit_page(request):
-	return render(request, 'Index/edit_page.html')#, {'html': html, 'css':css})
-
-def edit_page2(request, page_id):
+def edit_page(request, page_id):
 	return render(request, 'Index/edit_page.html', {'id': page_id})

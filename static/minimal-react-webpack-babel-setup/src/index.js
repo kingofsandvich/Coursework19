@@ -68,5 +68,4 @@ try {
 } catch (e) {
 
 }
-// ReactDOM = require('react-dom');
 module.hot.accept();

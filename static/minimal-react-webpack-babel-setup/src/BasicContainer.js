@@ -8,7 +8,6 @@ class BasicContainer extends Component {
       this.height = props.height;
       this.width = props.width;
       this.currentComp = React.createRef();
-      //this.state = {content: props.};
   }
   render() {
     return (
