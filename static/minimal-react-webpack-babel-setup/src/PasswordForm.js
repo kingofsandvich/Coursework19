@@ -233,7 +233,6 @@ class PasswordForm extends Component {
         break;
       }
     }
-    alert(canAdd);
     if (canAdd) {
       this.setState(state => {
         const accounts = state.accounts.concat({
