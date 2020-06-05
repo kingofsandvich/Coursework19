@@ -1,6 +1,6 @@
 urllib3==1.22
 vk==2.0.2
-Django==2.0.6
+Django==2.2.13
 django-cors-headers==2.2.0
 django-crispy-forms==1.7.2
 django-picklefield==2.0
